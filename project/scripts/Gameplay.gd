@@ -62,7 +62,7 @@ var planet_models = [
 	},
 	{
 		"name": "Earth",
-		"marker_id": 2884, #2884
+		"marker_id": 1, #2884
 		"path": NodePath("SubViewportContainer/SubViewport/Earth_Marker3D/earth_model"),
 		"diameter_km": 12742.0,
 		"aabb_size": Vector3(0.063104, 0.063089, 0.063308)
@@ -86,7 +86,7 @@ var planet_models = [
 	},
 	{
 		"name": "Saturn",
-		"marker_id": 1,
+		"marker_id": 2884,
 		"path": NodePath("SubViewportContainer/SubViewport/Saturn_Marker3D/saturn_model"),
 		"diameter_km": 116460.0,
 		"aabb_size": Vector3(120457.7, 120469.0, 112034.2)
@@ -94,7 +94,7 @@ var planet_models = [
 	},
 	{
 		"name": "Uranus",
-		"marker_id": 1,
+		"marker_id": 626,
 		"path": NodePath("SubViewportContainer/SubViewport/Uranus_Marker3D/uranus_model"),
 		"diameter_km": 50724.0,
 		"aabb_size": Vector3(511.2594, 511.2757, 501.3231)
@@ -102,7 +102,7 @@ var planet_models = [
 	},
 	{
 		"name": "Neptune",
-		"marker_id": 1,
+		"marker_id": 7236,
 		"path": NodePath("SubViewportContainer/SubViewport/Neptune_Marker3D/neptune_model"),
 		"diameter_km": 49244.0,
 		"aabb_size": Vector3(1.999998, 1.999997, 2.0)
@@ -111,6 +111,7 @@ var planet_models = [
 ]
 
 const SUN_SCALE = 0.005
+const UNIFORM_TARGET_SIZE = 0.0005  # Adjust as needed for visibility
 
 var sun = get_planet_by_name("Sun")
 var mercury = get_planet_by_name("Mercury")
@@ -191,7 +192,7 @@ func _on_timer_framerate():
 			sun["diameter_km"],
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_sun)
-		#var scale_factor_sun = 0.005
+		scale_factor_sun = scale_factor_sun * 100 
 		transform_sun.basis.x *= scale_factor_sun
 		transform_sun.basis.y *= scale_factor_sun
 		transform_sun.basis.z *= scale_factor_sun
@@ -224,7 +225,6 @@ func _on_timer_framerate():
 			sun["diameter_km"],
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_mercury)
-		#scale_factor_mercury = scale_factor_mercury * 3
 		transform_mercury.basis.x *= scale_factor_mercury
 		transform_mercury.basis.y *= scale_factor_mercury
 		transform_mercury.basis.z *= scale_factor_mercury
@@ -258,7 +258,6 @@ func _on_timer_framerate():
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_venus)
 		#var scale_factor_venus = 0.05
-		#scale_factor_venus = scale_factor_venus * 3
 		transform_venus.basis.x *= scale_factor_venus
 		transform_venus.basis.y *= scale_factor_venus
 		transform_venus.basis.z *= scale_factor_venus
@@ -292,7 +291,6 @@ func _on_timer_framerate():
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_earth)
 		#var scale_factor_earth = 0.009
-		#scale_factor_earth = scale_factor_earth * 3
 		transform_earth.basis.x *= scale_factor_earth
 		transform_earth.basis.y *= scale_factor_earth
 		transform_earth.basis.z *= scale_factor_earth
@@ -326,7 +324,6 @@ func _on_timer_framerate():
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_mars)
 		#var scale_factor_mars = 0.0005
-		#scale_factor_mars = scale_factor_mars * 3
 		transform_mars.basis.x *= scale_factor_mars
 		transform_mars.basis.y *= scale_factor_mars
 		transform_mars.basis.z *= scale_factor_mars
@@ -359,8 +356,7 @@ func _on_timer_framerate():
 			sun["diameter_km"],
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_jupiter)
-		#var scale_factor_jupiter = 0.0009
-		scale_factor_jupiter = scale_factor_jupiter * 3
+		scale_factor_jupiter = scale_factor_jupiter * 50 #0.0009
 		transform_jupiter.basis.x *= scale_factor_jupiter
 		transform_jupiter.basis.y *= scale_factor_jupiter
 		transform_jupiter.basis.z *= scale_factor_jupiter
@@ -393,8 +389,7 @@ func _on_timer_framerate():
 			sun["diameter_km"],
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_saturn)
-		#var scale_factor_saturn = 0.00005
-		scale_factor_saturn = scale_factor_saturn * 3
+		scale_factor_saturn = 0.00005
 		transform_saturn.basis.x *= scale_factor_saturn
 		transform_saturn.basis.y *= scale_factor_saturn
 		transform_saturn.basis.z *= scale_factor_saturn
@@ -433,8 +428,7 @@ func _on_timer_framerate():
 			sun["diameter_km"],
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_uranus)
-		#var scale_factor_uranus = 0.00009
-		scale_factor_uranus = scale_factor_uranus * 3
+		scale_factor_uranus = 0.0001
 		transform_uranus.basis.x *= scale_factor_uranus
 		transform_uranus.basis.y *= scale_factor_uranus
 		transform_uranus.basis.z *= scale_factor_uranus
@@ -468,7 +462,6 @@ func _on_timer_framerate():
 			max(sun["aabb_size"].x, sun["aabb_size"].y, sun["aabb_size"].z))
 		#print(scale_factor_neptune)
 		#var scale_factor_neptune = 0.0002
-		scale_factor_neptune = scale_factor_neptune * 3
 		transform_neptune.basis.x *= scale_factor_neptune
 		transform_neptune.basis.y *= scale_factor_neptune
 		transform_neptune.basis.z *= scale_factor_neptune
@@ -545,15 +538,16 @@ func get_planet_scale(
 	planet_diameter_km: float, planet_aabb: float,
 	sun_diameter_km: float, sun_aabb: float
 ) -> float:
-	if planet_diameter_km == sun_diameter_km:
-		return SUN_SCALE
-
-	var diameter_ratio = planet_diameter_km / sun_diameter_km
-	var visual_ratio = boosted_ratio(diameter_ratio)
-	var mesh_correction = clamp(sun_aabb / planet_aabb, 0.1, 10.0)  # capped!
-
-	var scale = visual_ratio * mesh_correction * SUN_SCALE
-	return clamp(scale, SUN_SCALE * 0.25, SUN_SCALE * 0.99)
+	#if planet_diameter_km == sun_diameter_km:
+		#return SUN_SCALE
+#
+	#var diameter_ratio = planet_diameter_km / sun_diameter_km
+	#var visual_ratio = boosted_ratio(diameter_ratio)
+	#var mesh_correction = clamp(sun_aabb / planet_aabb, 0.1, 10.0)  # capped!
+#
+	#var scale = visual_ratio * mesh_correction * SUN_SCALE
+	#return clamp(scale, SUN_SCALE * 0.25, SUN_SCALE * 0.99)
+	return UNIFORM_TARGET_SIZE / planet_aabb
 
 func boosted_ratio(d: float) -> float:
 	return 1.0 - exp(-d * 1000.0)
