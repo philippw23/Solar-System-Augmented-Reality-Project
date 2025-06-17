@@ -72,7 +72,7 @@ git lfs pull
 
 📄 License
 
-MIT License – see LICENSE
+None
 
 ⸻
 
