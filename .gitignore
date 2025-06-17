@@ -1,0 +1,34 @@
+# Godot Engine
+.import/
+.export/
+*.import
+*.godot_export
+*.translation
+
+# Build folders
+build/
+bin/
+*.o
+*.obj
+*.exe
+*.so
+*.dll
+*.dylib
+
+# Godot Metadata
+icon.svg.import
+*.tmp
+
+# IDE/Editor
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Optional: große Dateien oder persönliche Assets
+MarkerCube.mp4
+MarkerMovie.MP4
+
+# CMake or SCons cache (falls benutzt)
+.cache/
