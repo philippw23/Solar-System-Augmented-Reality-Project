@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cib3nugh0q4b8"]
+
+[ext_resource type="Texture2D" uid="uid://vx1p4cstfcay" path="res://Meshes/Mercury/textures/Diffuse_1K.png" id="1_h52gt"]
+[ext_resource type="Texture2D" uid="uid://be2net5sb2bxt" path="res://Meshes/Mercury/textures/Bump_1K.png" id="2_whlfp"]
+
+[resource]
+albedo_texture = ExtResource("1_h52gt")
+normal_enabled = true
+normal_texture = ExtResource("2_whlfp")

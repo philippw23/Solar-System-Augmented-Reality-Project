@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ulvwfjgs51i2"]
+
+[ext_resource type="PackedScene" uid="uid://bg3xv6qsjb80r" path="res://Meshes/Venus/source/Venus_1K.fbx" id="1_lyvr1"]
+[ext_resource type="Material" uid="uid://c0t3vda613kh1" path="res://Meshes/Venus/venus.tres" id="2_7cnhq"]
+[ext_resource type="Material" uid="uid://rm545d3xwe6y" path="res://Meshes/Venus/atmosphere.tres" id="3_wiko4"]
+
+[node name="Venus_1K" instance=ExtResource("1_lyvr1")]
+
+[node name="Venus" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_7cnhq")
+
+[node name="Atmosphere" parent="Venus" index="0"]
+surface_material_override/0 = ExtResource("3_wiko4")

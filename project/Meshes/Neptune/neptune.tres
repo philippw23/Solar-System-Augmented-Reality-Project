@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dbmovt21sp2de"]
+
+[ext_resource type="Texture2D" uid="uid://bdyh3woqttreo" path="res://Meshes/Neptune/textures/2k_neptune.jpg" id="1_q7hs4"]
+
+[resource]
+albedo_texture = ExtResource("1_q7hs4")

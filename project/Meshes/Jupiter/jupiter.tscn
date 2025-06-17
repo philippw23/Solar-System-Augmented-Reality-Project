@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://biege33kt2h5x"]
+
+[ext_resource type="PackedScene" uid="uid://cdd4cjkln8a0s" path="res://Meshes/jupiter/source/jupiter.fbx" id="1_y6gxn"]
+[ext_resource type="Material" uid="uid://ty32x8jygnki" path="res://Meshes/jupiter/material_jupiter_body.tres" id="2_amlm0"]
+[ext_resource type="Material" uid="uid://bsxle12tekdss" path="res://Meshes/jupiter/material_jupiter_rings0.tres" id="3_5kq2q"]
+[ext_resource type="Material" uid="uid://daaqunlf0hgfm" path="res://Meshes/jupiter/material_jupiter_rings1.tres" id="4_lrlok"]
+
+[node name="jupiter" instance=ExtResource("1_y6gxn")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+
+[node name="jupiter1_A" parent="jupiter_Dummy" index="0"]
+surface_material_override/0 = ExtResource("2_amlm0")
+
+[node name="jupiter2_B_001" parent="jupiter_Dummy" index="1"]
+surface_material_override/0 = ExtResource("3_5kq2q")
+surface_material_override/1 = ExtResource("4_lrlok")

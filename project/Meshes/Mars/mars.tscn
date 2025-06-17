@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://blcsng6ihg4qh"]
+
+[ext_resource type="PackedScene" path="res://Meshes/Mars/source/Mars_2K.fbx" id="1_guq2m"]
+[ext_resource type="Material" path="res://Meshes/Mars/mars.tres" id="2_1tcki"]
+[ext_resource type="Texture2D" path="res://Meshes/Mars/texture/Dust_2K.png" id="3_abvg8"]
+[ext_resource type="Texture2D" path="res://Meshes/Mars/texture/Clouds_2K.png" id="4_cydlf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjpxi"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 1
+albedo_texture = ExtResource("3_abvg8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wt5x6"]
+transparency = 2
+alpha_scissor_threshold = 0.29
+alpha_antialiasing_mode = 0
+cull_mode = 1
+albedo_texture = ExtResource("4_cydlf")
+
+[node name="Mars_2K" instance=ExtResource("1_guq2m")]
+
+[node name="Mars" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_1tcki")
+
+[node name="Dust" parent="Mars" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_pjpxi")
+
+[node name="Clouds" parent="Mars" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wt5x6")
+
+[node name="Atmosphere" parent="Mars" index="2"]
+visible = false

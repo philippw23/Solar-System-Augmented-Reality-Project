@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0xpci0f8wbo3"]
+
+[ext_resource type="Texture2D" uid="uid://cfthp1hsx70at" path="res://Meshes/Earth/texture/Clouds_2K.png" id="1_frdk5"]
+
+[resource]
+render_priority = 1
+transparency = 1
+blend_mode = 1
+albedo_texture = ExtResource("1_frdk5")

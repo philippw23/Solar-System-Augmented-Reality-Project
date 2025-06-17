@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://rm545d3xwe6y"]
+
+[ext_resource type="Texture2D" uid="uid://bg7pjocv8db1f" path="res://Meshes/Venus/texture/Atmosphere_2K.png" id="1_3735l"]
+
+[resource]
+albedo_texture = ExtResource("1_3735l")

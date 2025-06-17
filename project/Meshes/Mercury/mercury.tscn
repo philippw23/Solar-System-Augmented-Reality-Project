@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhrb7yrtyeft7"]
+
+[ext_resource type="PackedScene" uid="uid://28541h5t5e7v" path="res://Meshes/Mercury/source/Mercury_1K.fbx" id="1_3l0d7"]
+[ext_resource type="Material" uid="uid://cib3nugh0q4b8" path="res://Meshes/Mercury/mercury.tres" id="2_157pd"]
+
+[node name="Mercury_1K" instance=ExtResource("1_3l0d7")]
+
+[node name="Mercury" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_157pd")

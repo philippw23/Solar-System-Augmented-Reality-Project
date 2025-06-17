@@ -1,0 +1,4 @@
+/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example copy/build/CMakeFiles/generate_bindings.dir
+/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example copy/build/CMakeFiles/godot-cpp.dir
+/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example copy/build/CMakeFiles/edit_cache.dir
+/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example copy/build/CMakeFiles/rebuild_cache.dir

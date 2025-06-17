@@ -1,0 +1,202 @@
+[gd_scene load_steps=12 format=3 uid="uid://trsml2gs8ogq"]
+
+[ext_resource type="Script" uid="uid://ckwukosusmt8s" path="res://scripts/Gameplay.gd" id="1_2ycnw"]
+[ext_resource type="FontFile" uid="uid://bbp6hfeqa876q" path="res://Fonts/roboto_5/ttf/roboto-cyrillic-ext-400-normal.ttf" id="2_hi88e"]
+[ext_resource type="PackedScene" uid="uid://dhvxjw7o6o34d" path="res://Meshes/Uranus/source/uranus.fbx" id="2_xtdpg"]
+[ext_resource type="PackedScene" uid="uid://87r36f85kboj" path="res://Meshes/Sun/sun.glb" id="3_haghx"]
+[ext_resource type="PackedScene" uid="uid://bhrb7yrtyeft7" path="res://Meshes/Mercury/mercury.tscn" id="3_tcknp"]
+[ext_resource type="PackedScene" uid="uid://ulvwfjgs51i2" path="res://Meshes/Venus/venus.tscn" id="4_4rqip"]
+[ext_resource type="PackedScene" uid="uid://dw6rhw8fxevd2" path="res://Meshes/Earth/earth.tscn" id="4_qclpm"]
+[ext_resource type="PackedScene" uid="uid://biege33kt2h5x" path="res://Meshes/Jupiter/jupiter.tscn" id="4_tcknp"]
+[ext_resource type="PackedScene" uid="uid://jsqpjil51wg2" path="res://Meshes/Mars/mars.glb" id="7_kxbe2"]
+[ext_resource type="PackedScene" uid="uid://dxuxqg1qeocfj" path="res://Meshes/Saturn/saturn.glb" id="9_kxbe2"]
+[ext_resource type="PackedScene" uid="uid://78f6gfhrbwwe" path="res://Meshes/Neptune/neptune.glb" id="10_kxbe2"]
+
+[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "mercury_target", "mercury_label3d", "venus_target", "venus_label3d", "earth_target", "earth_label3d", "mars_target", "mars_label3d", "jupiter_target", "jupiter_label3d", "saturn_target", "saturn_label3d", "uranus_target", "uranus_label3d", "neptune_target", "neptune_label3d")]
+script = ExtResource("1_2ycnw")
+camera_canvas = NodePath("CameraCanvas")
+overlay_canvas = NodePath("OverlayCanvas")
+threshold_slider = NodePath("VBoxContainer-MenuBottom/PanelContainer/HBoxContainer/HSlider-Threshold")
+mode_button = NodePath("VBoxContainer-MenuTop/HBoxContainer/OptionButton-ImageMode")
+overlay_button = NodePath("VBoxContainer-MenuTop/HBoxContainer/CheckButton-Overlay")
+sun_target = NodePath("SubViewportContainer/SubViewport/Sun_Marker3D")
+sun_label3d = NodePath("SubViewportContainer/SubViewport/Sun_Label3D")
+mercury_target = NodePath("SubViewportContainer/SubViewport/Mercury_Marker3D")
+mercury_label3d = NodePath("SubViewportContainer/SubViewport/Mercury_Label3D")
+venus_target = NodePath("SubViewportContainer/SubViewport/Venus_Marker3D")
+venus_label3d = NodePath("SubViewportContainer/SubViewport/Venus_Label3D")
+earth_target = NodePath("SubViewportContainer/SubViewport/Earth_Marker3D")
+earth_label3d = NodePath("SubViewportContainer/SubViewport/Earth_Label3D")
+mars_target = NodePath("SubViewportContainer/SubViewport/Mars_Marker3D")
+mars_label3d = NodePath("SubViewportContainer/SubViewport/Mars_Label3D")
+jupiter_target = NodePath("SubViewportContainer/SubViewport/Jupiter_Marker3D")
+jupiter_label3d = NodePath("SubViewportContainer/SubViewport/Juptier_Label3D")
+saturn_target = NodePath("SubViewportContainer/SubViewport/Saturn_Marker3D")
+saturn_label3d = NodePath("SubViewportContainer/SubViewport/Saturn_Label3D")
+uranus_target = NodePath("SubViewportContainer/SubViewport/Uranus_Marker3D")
+uranus_label3d = NodePath("SubViewportContainer/SubViewport/Uranus_Label3D")
+neptune_target = NodePath("SubViewportContainer/SubViewport/Neptune_Marker3D")
+neptune_label3d = NodePath("SubViewportContainer/SubViewport/Neptune_Label3D")
+
+[node name="CameraCanvas" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="OverlayCanvas" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(640, 360)
+offset_right = 640.0
+offset_bottom = 360.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+current = true
+fov = 30.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Sun_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Sun_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="sun_model" parent="SubViewportContainer/SubViewport/Sun_Marker3D" instance=ExtResource("3_haghx")]
+
+[node name="Mercury_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Mercury_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="mercury_model" parent="SubViewportContainer/SubViewport/Mercury_Marker3D" instance=ExtResource("3_tcknp")]
+
+[node name="Venus_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Venus_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="venus_model" parent="SubViewportContainer/SubViewport/Venus_Marker3D" instance=ExtResource("4_4rqip")]
+
+[node name="Earth_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Earth_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="earth_model" parent="SubViewportContainer/SubViewport/Earth_Marker3D" instance=ExtResource("4_qclpm")]
+
+[node name="Mars_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Mars_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="mars_model" parent="SubViewportContainer/SubViewport/Mars_Marker3D" instance=ExtResource("7_kxbe2")]
+
+[node name="Juptier_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Jupiter_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="jupiter_model" parent="SubViewportContainer/SubViewport/Jupiter_Marker3D" instance=ExtResource("4_tcknp")]
+
+[node name="Saturn_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Saturn_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="saturn_model" parent="SubViewportContainer/SubViewport/Saturn_Marker3D" instance=ExtResource("9_kxbe2")]
+
+[node name="Uranus_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Uranus_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="uranus_model" parent="SubViewportContainer/SubViewport/Uranus_Marker3D" instance=ExtResource("2_xtdpg")]
+
+[node name="Neptune_Label3D" type="Label3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+pixel_size = 0.001
+font = ExtResource("2_hi88e")
+outline_size = 6
+
+[node name="Neptune_Marker3D" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+visible = false
+
+[node name="neptune_model" parent="SubViewportContainer/SubViewport/Neptune_Marker3D" instance=ExtResource("10_kxbe2")]
+
+[node name="VBoxContainer-MenuTop" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer-MenuTop"]
+layout_mode = 2
+
+[node name="OptionButton-ImageMode" type="OptionButton" parent="VBoxContainer-MenuTop/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Color"
+popup/item_0/id = 0
+popup/item_1/text = "Grey"
+popup/item_1/id = 1
+popup/item_2/text = "Threshold"
+popup/item_2/id = 2
+
+[node name="CheckButton-Overlay" type="CheckButton" parent="VBoxContainer-MenuTop/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer-MenuBottom" type="VBoxContainer" parent="."]
+offset_top = 625.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer-MenuBottom"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer-MenuBottom/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer-MenuBottom/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Threshold"
+
+[node name="HSlider-Threshold" type="HSlider" parent="VBoxContainer-MenuBottom/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 255.0

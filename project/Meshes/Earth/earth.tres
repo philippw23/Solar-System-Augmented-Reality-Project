@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://nk0yhfso4kuk"]
+
+[ext_resource type="Texture2D" uid="uid://cpr6hvsrmpthe" path="res://Meshes/Earth/texture/Diffuse_2K.png" id="1_o4xtf"]
+[ext_resource type="Texture2D" uid="uid://c63xnoqciw6sl" path="res://Meshes/Earth/texture/Night_lights_2K.png" id="2_2mxjm"]
+[ext_resource type="Texture2D" uid="uid://bk0k7jytujfvw" path="res://Meshes/Earth/texture/Bump_2K.png" id="3_6lh02"]
+[ext_resource type="Texture2D" uid="uid://doxhlokmxxl4e" path="res://Meshes/Earth/texture/Ocean_Mask_2K.png" id="4_8lg0x"]
+
+[resource]
+albedo_texture = ExtResource("1_o4xtf")
+roughness_texture = ExtResource("4_8lg0x")
+emission_enabled = true
+emission_texture = ExtResource("2_2mxjm")
+normal_enabled = true
+normal_texture = ExtResource("3_6lh02")

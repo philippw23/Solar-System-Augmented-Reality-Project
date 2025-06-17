@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://daaqunlf0hgfm"]
+
+[ext_resource type="Texture2D" uid="uid://bu0043q0fybp7" path="res://Meshes/jupiter/texture/Uv1_jupiter2_diff.png" id="1_6va8g"]
+[ext_resource type="Texture2D" uid="uid://l4167e4a1jak" path="res://Meshes/jupiter/texture/Uv2_jupiter2_bump.png" id="2_p7ahl"]
+
+[resource]
+albedo_texture = ExtResource("1_6va8g")
+albedo_texture_force_srgb = true
+normal_enabled = true
+normal_texture = ExtResource("2_p7ahl")

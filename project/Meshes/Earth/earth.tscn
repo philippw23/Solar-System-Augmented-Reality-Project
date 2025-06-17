@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw6rhw8fxevd2"]
+
+[ext_resource type="PackedScene" uid="uid://b52j0u2td4fbd" path="res://Meshes/Earth/src/Earth_2K.fbx" id="1_ccgul"]
+[ext_resource type="Material" uid="uid://nk0yhfso4kuk" path="res://Meshes/Earth/earth.tres" id="2_ciimg"]
+[ext_resource type="Material" uid="uid://l0stwpk1512v" path="res://Meshes/Earth/atmosphere.tres" id="3_fw31l"]
+[ext_resource type="Material" uid="uid://b0xpci0f8wbo3" path="res://Meshes/Earth/clouds.tres" id="4_oto1w"]
+
+[node name="Earth_2K" instance=ExtResource("1_ccgul")]
+
+[node name="Earth" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_ciimg")
+
+[node name="Atmosphere" parent="Earth" index="0"]
+surface_material_override/0 = ExtResource("3_fw31l")
+
+[node name="Clouds" parent="Earth" index="1"]
+surface_material_override/0 = ExtResource("4_oto1w")

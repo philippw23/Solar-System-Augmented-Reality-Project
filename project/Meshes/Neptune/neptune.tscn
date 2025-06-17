@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhts3y0pbyg6q"]
+
+[ext_resource type="PackedScene" uid="uid://cbpv4d74f6n7f" path="res://Meshes/Neptune/source/Neptune.fbx" id="1_v65f8"]
+[ext_resource type="Material" uid="uid://dbmovt21sp2de" path="res://Meshes/Neptune/neptune.tres" id="2_cptre"]
+
+[node name="Neptune" instance=ExtResource("1_v65f8")]
+
+[node name="Sphere" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_cptre")
