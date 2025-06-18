@@ -1,8 +1,8 @@
 extends Node
 
 @export_group("Canvas")
-@export var camera_canvas : Sprite2D;
-@export var overlay_canvas : Sprite2D;
+@export var camera_canvas : TextureRect;
+@export var overlay_canvas : TextureRect;
 @export_group("Input")
 @export var threshold_slider : Range;
 @export var mode_button : OptionButton;
