@@ -133,15 +133,18 @@ var overlay_texture : ImageTexture;
 var timer_framerate: Timer;
 
 func _ready():
+	## Live Feed Version
 	camera.open(0, 640, 480);
 	#camera.open(0, 1900, 820);
+	
+	## Video Versions
 	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/MarkerMovie.mp4");
 	
 	await get_tree().process_frame  # einmal warten
-	# 🔁 Warte, bis ein Bild geladen wurde (max 1 Sekunde)
-	# 🕒 Warte, bis Kamera ein nicht-leeres Bild liefert
-	var timeout_frames := 60  # max. 1 Sekunde bei 60 FPS
+	## 🔁 Wait until an image has been loaded (max. 1 second)
+	## 🕒 Wait until camera delivers a non-empty image
+	var timeout_frames := 60  # max. 1 second at 60 FPS
 	while timeout_frames > 0:
 		var img := camera.get_image()
 		if img and not img.is_empty():
@@ -150,7 +153,7 @@ func _ready():
 		timeout_frames -= 1
 
 	if timeout_frames == 0:
-		push_error("❌ Kamera liefert kein Bild!")
+		push_error("❌ Camera does not deliver a picture!")
 		return
 		
 	var cam_width = camera.get_width()

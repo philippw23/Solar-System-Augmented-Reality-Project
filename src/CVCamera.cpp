@@ -94,6 +94,25 @@ void CVCamera::open_file(String path)
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
     video_file_playback = true;
+
+
+    // ✅ Get frame immediately and set intrinsics
+    capture.read(frame_raw);
+    if (frame_raw.empty()) {
+        UtilityFunctions::push_warning("Initial frame read failed – cannot set intrinsics.");
+        return;
+    }
+
+    int max_d = cv::max(frame_raw.rows, frame_raw.cols);
+    int cx = frame_raw.cols / 2.0;
+    int cy = frame_raw.rows / 2.0;
+    float fx = max_d;
+    float fy = max_d;
+    cv::Mat_<double> K = (cv::Mat_<double>(3, 3) <<  fx, 0,  cx,
+                                                                0,  fy, cy,
+                                                                0,  0,  1);
+    
+    set_intrinsics(K);
 }
 
 void CVCamera::close()
