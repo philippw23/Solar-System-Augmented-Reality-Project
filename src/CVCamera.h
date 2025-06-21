@@ -17,6 +17,7 @@ Sandro Weber <sandro.weber@tum.de>
 #include <opencv2/videoio.hpp>
 #include <opencv2/imgproc.hpp>
 #include <map>
+#include <godot_cpp/classes/camera3d.hpp>
 
 struct StripDimensions
 {
@@ -47,6 +48,7 @@ namespace godot
         bool video_file_playback;
         double framerate;
         double threshold;
+        cv::Mat intrinsics;
 
         void update_frame();
         Ref<Image> mat_to_image(cv::Mat mat);
@@ -57,6 +59,12 @@ namespace godot
         std::array<cv::Point2f, 4> calculateSubpixCorners(float subpix_line_params[16], bool draw_on_overlay);
         int getMarkerId(cv::Mat frame_src, std::array<cv::Point2f, 4> subpix_corners, bool draw_marker_id);
         cv::Mat getMarkerPose(std::array<cv::Point2f, 4> subpixel_corners);
+        int get_width() const;
+        int get_height() const;
+        double compute_vertical_fov(int image_height, double fy_px);
+        float get_calculated_fov(godot::Camera3D* camera_node);
+        void set_intrinsics(const cv::Mat &camera_matrix);
+        cv::Mat get_intrinsics() const;
 
     protected:
         static void _bind_methods();

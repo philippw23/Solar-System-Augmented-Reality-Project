@@ -12,6 +12,8 @@ Sandro Weber <sandro.weber@tum.de>
 #include <godot_cpp/classes/engine.hpp>
 #include <bitset>
 #include <opencv2/calib3d.hpp>
+#include <godot_cpp/classes/camera3d.hpp>
+#include <cmath>  // std::atan, std::atan2
 
 using namespace godot;
 
@@ -33,6 +35,10 @@ void CVCamera::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_marker_transform"), &CVCamera::get_marker_transform);
     ClassDB::bind_method(D_METHOD("has_marker_transform"), &CVCamera::has_marker_transform);
     ClassDB::bind_method(D_METHOD("get_all_marker_ids"), &CVCamera::get_all_marker_ids);
+    ClassDB::bind_method(D_METHOD("get_width"), &CVCamera::get_width);
+    ClassDB::bind_method(D_METHOD("get_height"), &CVCamera::get_height);
+    ClassDB::bind_method(D_METHOD("get_calculated_fov"), &CVCamera::get_calculated_fov);  // optional
+    //ClassDB::bind_method(D_METHOD("set_intrinsics"), &CVCamera::set_intrinsics);  // optional
 }
 
 CVCamera::CVCamera()
@@ -57,6 +63,24 @@ void CVCamera::open(int device, int width = 1920, int height = 1080)
         UtilityFunctions::push_error("Couldn't open camera.");
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
+
+    // 👇 Frame sofort holen (einmalig)
+    capture.read(frame_raw);
+    if (frame_raw.empty()) {
+        UtilityFunctions::push_warning("Initial frame read failed – cannot set intrinsics.");
+        return;
+    }
+
+    int max_d = cv::max(frame_raw.rows, frame_raw.cols);
+    int cx = frame_raw.cols / 2.0;
+    int cy = frame_raw.rows / 2.0;
+    float fx = max_d;
+    float fy = max_d;
+    cv::Mat_<double> K = (cv::Mat_<double>(3, 3) <<  fx, 0,  cx,
+                                                                0,  fy, cy,
+                                                                0,  0,  1);
+    
+    set_intrinsics(K);
 }
 
 void CVCamera::open_file(String path)
@@ -684,7 +708,15 @@ int CVCamera::getMarkerId(cv::Mat frame_src, std::array<cv::Point2f, 4> subpix_c
     // cv::Point3f mcLR(pos0, -pos0, 0.0);   // lower right
     // cv::Point3f mcUR(pos0, pos0, 0.0);    // upper right
     // cv::Point3f mcUL(-pos0, pos0, 0.0);   // upper left
+    // Reorder to bottom-left, top-left, top-right, bottom-right
+    // std::array<cv::Point2f, 4> ordered_corners;
+    // ordered_corners[0] = subpix_corners[3];
+    // ordered_corners[1] = subpix_corners[0];
+    // ordered_corners[2] = subpix_corners[1];
+    // ordered_corners[3] = subpix_corners[2];
+
     cv::Mat pose = getMarkerPose(subpix_corners);
+    //cv::Mat pose = getMarkerPose(ordered_corners);
     if (!pose.empty()) {
         marker_poses[code] = pose;
     }
@@ -693,7 +725,8 @@ int CVCamera::getMarkerId(cv::Mat frame_src, std::array<cv::Point2f, 4> subpix_c
 
 cv::Mat CVCamera::getMarkerPose(std::array<cv::Point2f, 4> subpixel_corners)
 {
-    constexpr float marker_size = 0.045f;
+    // constexpr float marker_size = 0.045f;
+    constexpr float marker_size = 0.08f;
     float hsl = marker_size / 2.0f;
     std::vector<cv::Point3f> objectPoints = {
         {-hsl, -hsl, 0}, // lower left corner
@@ -702,14 +735,7 @@ cv::Mat CVCamera::getMarkerPose(std::array<cv::Point2f, 4> subpixel_corners)
         { hsl, -hsl, 0} //lower right corner
     };
 
-    int max_d = cv::max(frame_raw.rows, frame_raw.cols);
-    int cx = frame_raw.cols / 2.0;
-    int cy = frame_raw.rows / 2.0;
-    float fx = max_d;
-    float fy = max_d;
-    cv::Mat_<double> cameraMatrix = (cv::Mat_<double>(3, 3) <<  fx, 0,  cx,
-                                                                0,  fy, cy,
-                                                                0,  0,  1);
+    cv::Mat cameraMatrix = get_intrinsics();
 
     cv::Mat distCoeffs = cv::Mat(1, 4, CV_64FC1, {0.0, 0.0, 0.0, 0.0}); // Camera distortion coefficients, can be assumed as no distortion for our simple case
 
@@ -756,15 +782,15 @@ Transform3D CVCamera::get_marker_transform(int marker_id)
         UtilityFunctions::push_warning("Invalid pose matrix for marker ID " + String::num(marker_id));
         return Transform3D(); // Identity
     }
-    for (int i = 0; i < 4; i++) {
-        std::ostringstream ss;
-        ss << "Row " << i << ": ";
-        for (int j = 0; j < 4; j++) {
-            ss << pose.at<float>(i, j);
-            if (j < 3) ss << ", ";
-        }
-        //UtilityFunctions::push_warning(ss.str().c_str());
-    }
+    // for (int i = 0; i < 4; i++) {
+    //     std::ostringstream ss;
+    //     ss << "Row " << i << ": ";
+    //     for (int j = 0; j < 4; j++) {
+    //         ss << pose.at<float>(i, j);
+    //         if (j < 3) ss << ", ";
+    //     }
+    //     UtilityFunctions::push_warning(ss.str().c_str());
+    // }
     // Extract rotation and translation
     Vector3 x_axis(pose.at<float>(0, 0), -pose.at<float>(1, 0), -pose.at<float>(2, 0));
     Vector3 y_axis(pose.at<float>(0, 1), -pose.at<float>(1, 1), -pose.at<float>(2, 1));
@@ -803,4 +829,44 @@ TypedArray<int> CVCamera::get_all_marker_ids() const {
         ids.append(kv.first);
     }
     return ids;
+}
+
+int CVCamera::get_width() const {
+    return frame_raw.cols;
+}
+
+int CVCamera::get_height() const {
+    return frame_raw.rows;
+}
+
+double CVCamera::compute_vertical_fov(int image_height, double fy_px) {
+    return 2.0 * std::atan(image_height / (2.0 * fy_px)) * (180.0 / M_PI);
+}
+
+float CVCamera::get_calculated_fov(godot::Camera3D* camera_node) {
+    if (!camera_node || intrinsics.empty()) {
+        String warning_msg = "CVCamera: Cannot compute FOV. ";
+        if (!camera_node) {
+            warning_msg += "Camera node is null. ";
+        }
+        if (intrinsics.empty()) {
+            warning_msg += "Intrinsics matrix is empty.";
+        }
+        UtilityFunctions::push_warning(warning_msg);
+        return 0.0f;
+    }
+
+    int height = this->frame_raw.rows;
+    double fy = this->intrinsics.at<double>(1, 1);  // f_y aus Kamera-Matrix
+
+    double fov_y = compute_vertical_fov(height, fy);
+    return fov_y;
+}
+
+void CVCamera::set_intrinsics(const cv::Mat &camera_matrix) {
+    camera_matrix.copyTo(intrinsics);
+}
+
+cv::Mat CVCamera::get_intrinsics() const {
+    return intrinsics;
 }

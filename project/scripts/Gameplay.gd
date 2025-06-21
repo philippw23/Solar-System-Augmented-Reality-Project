@@ -2,6 +2,7 @@ extends Node
 
 @export_group("Canvas")
 @export var camera_canvas : TextureRect;
+#@onready var camera_canvas = $UIRoot/CameraCanvas
 @export var overlay_canvas : TextureRect;
 @export_group("Input")
 @export var threshold_slider : Range;
@@ -35,10 +36,13 @@ extends Node
 @export var neptune_target: Marker3D
 @export var neptune_label3d: Label3D
 
+@export var box_target: Marker3D
+# 4169, 4282, 7215, 10571, 12438, 12698, 19941, 21405, 21817
+#[4169, 4283, 7332, 12698, 19941, 21405, 21817, 22458, 32523]
 var planet_models = [
 	{
 		"name": "Sun",
-		"marker_id": 90,
+		"marker_id": 4169,  #works 4169
 		"path": NodePath("SubViewportContainer/SubViewport/Sun_Marker3D/sun_model"),
 		"diameter_km": 1392000.0,
 		"aabb_size": Vector3(20.0, 20.0, 20.0)
@@ -46,7 +50,7 @@ var planet_models = [
 	},
 	{
 		"name": "Mercury",
-		"marker_id": 4648,
+		"marker_id": 4283,   #works 4282
 		"path": NodePath("SubViewportContainer/SubViewport/Mercury_Marker3D/mercury_model"),
 		"diameter_km": 4879.4,
 		"aabb_size": Vector3(0.004801, 0.004811, 0.004795)
@@ -54,7 +58,7 @@ var planet_models = [
 	},
 	{
 		"name": "Venus",
-		"marker_id": 1680, #1680
+		"marker_id": 7332, #1680
 		"path": NodePath("SubViewportContainer/SubViewport/Venus_Marker3D/venus_model"),
 		"diameter_km": 12104.0,
 		"aabb_size": Vector3(0.012104, 0.012085, 0.012104)
@@ -62,7 +66,7 @@ var planet_models = [
 	},
 	{
 		"name": "Earth",
-		"marker_id": 1, #2884
+		"marker_id": 22458, #2884
 		"path": NodePath("SubViewportContainer/SubViewport/Earth_Marker3D/earth_model"),
 		"diameter_km": 12742.0,
 		"aabb_size": Vector3(0.063104, 0.063089, 0.063308)
@@ -70,7 +74,7 @@ var planet_models = [
 	},
 	{
 		"name": "Mars",
-		"marker_id": 1, #626
+		"marker_id": 32523, #12438, #626
 		"path": NodePath("SubViewportContainer/SubViewport/Mars_Marker3D/mars_model"),
 		"diameter_km": 6779.0,
 		"aabb_size": Vector3(1.999998, 1.999997, 2.0)
@@ -78,7 +82,7 @@ var planet_models = [
 	},
 	{
 		"name": "Jupiter",
-		"marker_id": 1, #7236
+		"marker_id": 12698, #7236  #works
 		"path": NodePath("SubViewportContainer/SubViewport/Jupiter_Marker3D/jupiter_model"),
 		"diameter_km": 139820.0,
 		"aabb_size": Vector3(14.3, 14.3, 13.58)
@@ -86,7 +90,7 @@ var planet_models = [
 	},
 	{
 		"name": "Saturn",
-		"marker_id": 2884,
+		"marker_id": 19941,  #works
 		"path": NodePath("SubViewportContainer/SubViewport/Saturn_Marker3D/saturn_model"),
 		"diameter_km": 116460.0,
 		"aabb_size": Vector3(120457.7, 120469.0, 112034.2)
@@ -94,7 +98,7 @@ var planet_models = [
 	},
 	{
 		"name": "Uranus",
-		"marker_id": 626,
+		"marker_id": 21405, #works
 		"path": NodePath("SubViewportContainer/SubViewport/Uranus_Marker3D/uranus_model"),
 		"diameter_km": 50724.0,
 		"aabb_size": Vector3(511.2594, 511.2757, 501.3231)
@@ -102,7 +106,7 @@ var planet_models = [
 	},
 	{
 		"name": "Neptune",
-		"marker_id": 7236,
+		"marker_id": 21817, #works
 		"path": NodePath("SubViewportContainer/SubViewport/Neptune_Marker3D/neptune_model"),
 		"diameter_km": 49244.0,
 		"aabb_size": Vector3(1.999998, 1.999997, 2.0)
@@ -129,10 +133,45 @@ var overlay_texture : ImageTexture;
 var timer_framerate: Timer;
 
 func _ready():
-	#camera.open(0, 1920, 1080);
-	camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example/MarkerMovie.mp4");
+	camera.open(0, 640, 480);
+	#camera.open(0, 1900, 820);
+	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Solar_System_Test.mp4");
+	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/MarkerMovie.mp4");
+	
+	await get_tree().process_frame  # einmal warten
+	# 🔁 Warte, bis ein Bild geladen wurde (max 1 Sekunde)
+	# 🕒 Warte, bis Kamera ein nicht-leeres Bild liefert
+	var timeout_frames := 60  # max. 1 Sekunde bei 60 FPS
+	while timeout_frames > 0:
+		var img := camera.get_image()
+		if img and not img.is_empty():
+			break
+		await get_tree().process_frame
+		timeout_frames -= 1
+
+	if timeout_frames == 0:
+		push_error("❌ Kamera liefert kein Bild!")
+		return
+		
+	var cam_width = camera.get_width()
+	var cam_height = camera.get_height()
+	
+	print("📷 Camera Resolution:", cam_width, "x", cam_height)
+	# Scaling Viewport & Canvas
+	$UIRoot/SubViewportContainer/SubViewport.size = Vector2(cam_width, cam_height)
+	camera_canvas.size = Vector2(cam_width, cam_height)
+	overlay_canvas.size = Vector2(cam_width, cam_height)
+	
+	# Setting FOV of the virtual Camera
+	var godot_camera_3d = $UIRoot/SubViewportContainer/SubViewport/Camera3D as Camera3D
+	var fov_y = camera.get_calculated_fov(godot_camera_3d)
+	print("Berechnete FOV:", fov_y)
+	print("Previous Godot-Camera FOV:", godot_camera_3d.fov)
+	godot_camera_3d.fov = fov_y
+	print("Current Godot-Camera FOV:", godot_camera_3d.fov)
 	
 	camera.flip(false, false);
+	
 	texture = ImageTexture.new();
 	overlay_texture = ImageTexture.new();
 	
@@ -182,6 +221,12 @@ func _on_timer_framerate():
 	#7.	Uranus   ✅
 	#8.	Neptune  ✅
 	
+	if camera.has_marker_transform(1680):
+		var transform_box = camera.get_marker_transform(1680) #4282
+		box_target.transform = transform_box
+		box_target.visible = true
+	else:
+		box_target.visible = false
 	# ==== Sun ====
 	if camera.has_marker_transform(sun["marker_id"]):
 		# Sun
@@ -327,6 +372,7 @@ func _on_timer_framerate():
 		transform_mars.basis.x *= scale_factor_mars
 		transform_mars.basis.y *= scale_factor_mars
 		transform_mars.basis.z *= scale_factor_mars
+		
 		mars_target.transform = transform_mars
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
 		mars_target.visible = true;
@@ -485,7 +531,7 @@ func _on_timer_framerate():
 		neptune_label3d.visible = false
 			
 	var marker = camera.get_all_marker_ids();
-	#print(marker) #90 626 1680 2884 4648 7236
+	print(marker) #90 626 1680 2884 4648 7236
 	
 func _on_threshold_changed(value : float):
 	camera.set_threshold(value);

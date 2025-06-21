@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://trsml2gs8ogq"]
+[gd_scene load_steps=13 format=3 uid="uid://trsml2gs8ogq"]
 
 [ext_resource type="Script" uid="uid://ckwukosusmt8s" path="res://scripts/Gameplay.gd" id="1_2ycnw"]
 [ext_resource type="FontFile" uid="uid://bbp6hfeqa876q" path="res://Fonts/roboto_5/ttf/roboto-cyrillic-ext-400-normal.ttf" id="2_hi88e"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://dxuxqg1qeocfj" path="res://Meshes/Saturn/saturn.glb" id="9_kxbe2"]
 [ext_resource type="PackedScene" uid="uid://78f6gfhrbwwe" path="res://Meshes/Neptune/neptune.glb" id="10_kxbe2"]
 
-[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "mercury_target", "mercury_label3d", "venus_target", "venus_label3d", "earth_target", "earth_label3d", "mars_target", "mars_label3d", "jupiter_target", "jupiter_label3d", "saturn_target", "saturn_label3d", "uranus_target", "uranus_label3d", "neptune_target", "neptune_label3d")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxbe2"]
+albedo_color = Color(0.509804, 1, 1, 1)
+
+[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "mercury_target", "mercury_label3d", "venus_target", "venus_label3d", "earth_target", "earth_label3d", "mars_target", "mars_label3d", "jupiter_target", "jupiter_label3d", "saturn_target", "saturn_label3d", "uranus_target", "uranus_label3d", "neptune_target", "neptune_label3d", "box_target")]
 script = ExtResource("1_2ycnw")
 camera_canvas = NodePath("UIRoot/CameraCanvas")
 overlay_canvas = NodePath("UIRoot/OverlayCanvas")
@@ -37,41 +40,35 @@ uranus_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Uranus_Marker3
 uranus_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Uranus_Label3D")
 neptune_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Marker3D")
 neptune_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Label3D")
+box_target = NodePath("UIRoot/SubViewportContainer/SubViewport/box_target")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+anchors_preset = 0
 
 [node name="CameraCanvas" type="TextureRect" parent="UIRoot"]
 layout_mode = 1
-stretch_mode = 4
+stretch_mode = 2
 
 [node name="OverlayCanvas" type="TextureRect" parent="UIRoot"]
 layout_mode = 1
 stretch_mode = 6
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UIRoot"]
-custom_minimum_size = Vector2(640, 360)
 layout_mode = 1
 offset_right = 640.0
-offset_bottom = 360.0
+offset_bottom = 480.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UIRoot/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(640, 360)
+size = Vector2i(640, 480)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 current = true
-fov = 30.0
+fov = 40.5
 
 [node name="OmniLight3D" type="OmniLight3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
@@ -93,6 +90,7 @@ font = ExtResource("2_hi88e")
 outline_size = 6
 
 [node name="Mercury_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+visible = false
 
 [node name="mercury_model" parent="UIRoot/SubViewportContainer/SubViewport/Mercury_Marker3D" instance=ExtResource("3_tcknp")]
 
@@ -173,7 +171,14 @@ visible = false
 
 [node name="neptune_model" parent="UIRoot/SubViewportContainer/SubViewport/Neptune_Marker3D" instance=ExtResource("10_kxbe2")]
 
+[node name="box_target" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="UIRoot/SubViewportContainer/SubViewport/box_target"]
+transform = Transform3D(0.045, 0, 0, 0, 0.045, 0, 0, 0, 0.045, 0, 0, 0)
+material = SubResource("StandardMaterial3D_kxbe2")
+
 [node name="VBoxContainer-MenuTop" type="VBoxContainer" parent="UIRoot"]
+layout_mode = 0
 offset_right = 158.0
 offset_bottom = 40.0
 
@@ -195,6 +200,7 @@ popup/item_2/id = 2
 layout_mode = 2
 
 [node name="VBoxContainer-MenuBottom" type="VBoxContainer" parent="UIRoot"]
+layout_mode = 0
 offset_top = 625.0
 offset_right = 1152.0
 offset_bottom = 648.0
