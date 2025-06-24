@@ -131,8 +131,46 @@ var timer_framerate: Timer;
 var well_done_shown = false;
 
 func _ready():
+	## Live Feed Version
+	#camera.open(0, 640, 480);
 	#camera.open(0, 1920, 1080);
+	## Video Versions
 	camera.open_file("C:/Users/Garrulus/Downloads/TUM/1.Semester/Solar-System-Augmented-Reality-Project/MarkerMovie.mp4");
+	
+	
+	await get_tree().process_frame  # einmal warten
+
+	## 🔁 Wait until an image has been loaded (max. 1 second)
+	## 🕒 Wait until camera delivers a non-empty image
+	var timeout_frames := 60  # max. 1 second at 60 FPS
+	while timeout_frames > 0:
+		var img := camera.get_image()
+		if img and not img.is_empty():
+			break
+		await get_tree().process_frame
+		timeout_frames -= 1
+
+	if timeout_frames == 0:
+		push_error("❌ Kamera liefert kein Bild!")
+		push_error("❌ Camera does not deliver a picture!")
+		return
+
+	var cam_width = camera.get_width()
+	var cam_height = camera.get_height()
+
+	print("📷 Camera Resolution:", cam_width, "x", cam_height)
+	# Scaling Viewport & Canvas
+	$UIRoot/SubViewportContainer/SubViewport.size = Vector2(cam_width, cam_height)
+	camera_canvas.size = Vector2(cam_width, cam_height)
+	overlay_canvas.size = Vector2(cam_width, cam_height)
+
+	# Setting FOV of the virtual Camera
+	var godot_camera_3d = $UIRoot/SubViewportContainer/SubViewport/Camera3D as Camera3D
+	var fov_y = camera.get_calculated_fov(godot_camera_3d)
+	print("Berechnete FOV:", fov_y)
+	print("Previous Godot-Camera FOV:", godot_camera_3d.fov)
+	godot_camera_3d.fov = fov_y
+	print("Current Godot-Camera FOV:", godot_camera_3d.fov)
 	
 	camera.flip(false, false);
 	texture = ImageTexture.new();
