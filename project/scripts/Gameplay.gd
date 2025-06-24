@@ -3,6 +3,7 @@ extends Node
 @export_group("Canvas")
 @export var camera_canvas : TextureRect;
 @export var overlay_canvas : TextureRect;
+
 @export_group("Input")
 @export var threshold_slider : Range;
 @export var mode_button : OptionButton;
@@ -127,10 +128,11 @@ var camera : CVCamera = CVCamera.new();
 var texture : ImageTexture;
 var overlay_texture : ImageTexture;
 var timer_framerate: Timer;
+var well_done_shown = false;
 
 func _ready():
 	#camera.open(0, 1920, 1080);
-	camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example/MarkerMovie.mp4");
+	camera.open_file("C:/Users/Garrulus/Downloads/TUM/1.Semester/Solar-System-Augmented-Reality-Project/MarkerMovie.mp4");
 	
 	camera.flip(false, false);
 	texture = ImageTexture.new();
@@ -145,6 +147,7 @@ func _ready():
 	timer_framerate.start(1 / framerate);
 	
 	threshold_slider.value_changed.connect(_on_threshold_changed);
+
 	
 	#call_deferred("_print_model_size_deferred")
 	#marker_target.scale = Vector3(0.045, 0.045, 0.045);
@@ -199,6 +202,9 @@ func _on_timer_framerate():
 		sun_target.transform = transform_sun
 		
 		sun_target.visible = true;
+		if not well_done_shown:
+			show_well_done()
+			well_done_shown = true
 		
 		# Label 3D
 		# Customize for label only:
@@ -557,3 +563,26 @@ func get_planet_by_name(name: String) -> Dictionary:
 		if planet["name"] == name:
 			return planet
 	return {}
+
+func show_well_done():
+	var sprite = $UIRoot/CameraCanvas/WellDoneAnimation
+	print("sprite:", sprite)
+	sprite.visible = true
+	#sprite.global_position = get_viewport().get_visible_rect().size / 2
+	sprite.position = camera_canvas.get_size() / 2
+	sprite.frame = 0
+	sprite.play("welldone")
+	await sprite.animation_finished
+	await get_tree().create_timer(1.0).timeout
+	
+	var fade_time := 1.0  # 秒
+	var timer := 0.0
+	while timer < fade_time:
+		var alpha: float = lerp(1.0, 0.0, timer / fade_time)
+		sprite.modulate.a = alpha
+		await get_tree().process_frame  
+		timer += get_process_delta_time()
+	
+	sprite.modulate.a = 0.0
+
+	sprite.visible = false
