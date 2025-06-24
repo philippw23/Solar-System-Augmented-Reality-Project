@@ -32,3 +32,4 @@ MarkerMovie.MP4
 
 # CMake or SCons cache (falls benutzt)
 .cache/.DS_Store
+.DS_Store
