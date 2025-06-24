@@ -46,7 +46,7 @@ extends Node
 @export var neptune_label3d: Label3D
 @export var neptune_info_label: Label3D
 
-@export var box_target: Marker3D
+
 # 4169, 4282, 7215, 10571, 12438, 12698, 19941, 21405, 21817
 #[4169, 4283, 7332, 12698, 19941, 21405, 21817, 22458, 32523]
 var planet_models = [
@@ -239,12 +239,6 @@ func _on_timer_framerate():
 	#7.	Uranus   ✅
 	#8.	Neptune  ✅
 	
-	if camera.has_marker_transform(1680):
-		var transform_box = camera.get_marker_transform(1680) #4282
-		box_target.transform = transform_box
-		box_target.visible = true
-	else:
-		box_target.visible = false
 	# ==== Sun ====
 	if camera.has_marker_transform(sun["marker_id"]):
 		# Sun
