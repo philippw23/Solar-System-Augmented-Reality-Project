@@ -14,8 +14,9 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	GDREGISTER_RUNTIME_CLASS(GDExample);
-	GDREGISTER_RUNTIME_CLASS(CVCamera);
+    GDREGISTER_RUNTIME_CLASS(GDExample);
+    GDREGISTER_RUNTIME_CLASS(CVCamera);
+    
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
