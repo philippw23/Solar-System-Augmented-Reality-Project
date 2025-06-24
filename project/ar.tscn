@@ -135,7 +135,6 @@ custom_minimum_size = Vector2(640, 360)
 layout_mode = 1
 offset_right = 640.0
 offset_bottom = 360.0
-stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UIRoot/SubViewportContainer"]
 transparent_bg = true
