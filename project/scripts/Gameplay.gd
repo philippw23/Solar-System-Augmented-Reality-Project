@@ -55,72 +55,81 @@ var planet_models = [
 		"marker_id": 4169,  #works 4169
 		"path": NodePath("SubViewportContainer/SubViewport/Sun_Marker3D/sun_model"),
 		"diameter_km": 1392000.0,
-		"aabb_size": Vector3(20.0, 20.0, 20.0)
+		"aabb_size": Vector3(20.0, 20.0, 20.0),
 		# Sun: mesh = UnstableStarCore_1_0, AABB = (20.0, 20.0, 20.0)
+		"info_text": "• type: star\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: contains ~99.8%% of all the mass\n    in the solar system"
 	},
 	{
 		"name": "Mercury",
 		"marker_id": 4283,   #works 4282
 		"path": NodePath("SubViewportContainer/SubViewport/Mercury_Marker3D/mercury_model"),
 		"diameter_km": 4879.4,
-		"aabb_size": Vector3(0.004801, 0.004811, 0.004795)
+		"aabb_size": Vector3(0.004801, 0.004811, 0.004795),
 		# Mercury: mesh = Mercury, AABB = (0.004801, 0.004811, 0.004795)
+		"info_text": "• type: rocky planet\n• surface: cratered, with extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest and fastest planet"
 	},
 	{
 		"name": "Venus",
 		"marker_id": 7332, #1680
 		"path": NodePath("SubViewportContainer/SubViewport/Venus_Marker3D/venus_model"),
 		"diameter_km": 12104.0,
-		"aabb_size": Vector3(0.012104, 0.012085, 0.012104)
+		"aabb_size": Vector3(0.012104, 0.012085, 0.012104),
 		# Venus: mesh = Venus, AABB = (0.012104, 0.012085, 0.012104)
+		"info_text": "• type: rocky planet\n• surface: volcanic plains and mountains \n• diameter: %.0f km\n• fun fact: a day on this planet lasts longer than its year"
 	},
 	{
 		"name": "Earth",
 		"marker_id": 22458, #2884
 		"path": NodePath("SubViewportContainer/SubViewport/Earth_Marker3D/earth_model"),
 		"diameter_km": 12742.0,
-		"aabb_size": Vector3(0.063104, 0.063089, 0.063308)
+		"aabb_size": Vector3(0.063104, 0.063089, 0.063308),
 		# Earth: mesh = Earth, AABB = (0.063104, 0.063089, 0.063308)
+		"info_text": "• type: rocky planet\n• surface: mountains, valleys, volcanoes, liquid water \n• diameter: %.0f km\n• fun fact: the only known planet that supports life"
 	},
 	{
 		"name": "Mars",
 		"marker_id": 32523, #12438, #626
 		"path": NodePath("SubViewportContainer/SubViewport/Mars_Marker3D/mars_model"),
 		"diameter_km": 6779.0,
-		"aabb_size": Vector3(1.999998, 1.999997, 2.0)
+		"aabb_size": Vector3(1.999998, 1.999997, 2.0),
 		# Mars: mesh = Sphere_Material_002_0, AABB = (1.999998, 1.999997, 2.0)
+		"info_text": "• type: rocky planet\n• surface: dusty, cold, desert world \n• diameter: %.0f km\n• fun fact: once had flowing rivers and lakes"
 	},
 	{
 		"name": "Jupiter",
 		"marker_id": 12698, #7236  #works
 		"path": NodePath("SubViewportContainer/SubViewport/Jupiter_Marker3D/jupiter_model"),
 		"diameter_km": 139820.0,
-		"aabb_size": Vector3(14.3, 14.3, 13.58)
+		"aabb_size": Vector3(14.3, 14.3, 13.58),
 		# Jupiter: mesh = jupiter1_A, AABB = (14.3, 14.3, 13.58)
+		"info_text": "• type: gas giant\n• composition: hydrogen, helium \n• diameter: %.0f km\n• fun fact: has a storm larger than Earth, raging for at least 350 years"
 	},
 	{
 		"name": "Saturn",
 		"marker_id": 19941,  #works
 		"path": NodePath("SubViewportContainer/SubViewport/Saturn_Marker3D/saturn_model"),
 		"diameter_km": 116460.0,
-		"aabb_size": Vector3(120457.7, 120469.0, 112034.2)
+		"aabb_size": Vector3(120457.7, 120469.0, 112034.2),
 		# Saturn: mesh = 0, AABB = (120457.7, 120469.0, 112034.2)
+		"info_text": "• type: gas giant\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet from Earth discovered by the unaided human eye"
 	},
 	{
 		"name": "Uranus",
 		"marker_id": 21405, #works
 		"path": NodePath("SubViewportContainer/SubViewport/Uranus_Marker3D/uranus_model"),
 		"diameter_km": 50724.0,
-		"aabb_size": Vector3(511.2594, 511.2757, 501.3231)
+		"aabb_size": Vector3(511.2594, 511.2757, 501.3231),
 		# Uranus: mesh = uranus1_A, AABB = (511.2594, 511.2757, 501.3231)
+		"info_text": "• type: ice giant\n• composition: hydrogen, helium, methane (which gives its blue color) \n• diameter: %.0f km\n• fun fact: has an extreme axial tilt of about 98 degrees, causing it to rotate nearly on its side"
 	},
 	{
 		"name": "Neptune",
 		"marker_id": 21817, #works
 		"path": NodePath("SubViewportContainer/SubViewport/Neptune_Marker3D/neptune_model"),
 		"diameter_km": 49244.0,
-		"aabb_size": Vector3(1.999998, 1.999997, 2.0)
-		 # Neptune: mesh = Sphere_Material_002_0, AABB = (1.999998, 1.999997, 2.0)
+		"aabb_size": Vector3(1.999998, 1.999997, 2.0),
+		# Neptune: mesh = Sphere_Material_002_0, AABB = (1.999998, 1.999997, 2.0)
+		"info_text": "• type: ice giant\n• composition: hydrogen, helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet in our solar system"
 	},
 ]
 
@@ -136,6 +145,8 @@ var jupiter = get_planet_by_name("Jupiter")
 var saturn = get_planet_by_name("Saturn")
 var uranus = get_planet_by_name("Uranus")
 var neptune = get_planet_by_name("Neptune")
+var planet_name = "Mars"
+var ordered = ["Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
 
 var camera : CVCamera = CVCamera.new();
 #var camera = CVCamera.new()
@@ -203,9 +214,19 @@ func _ready():
 	threshold_slider.value_changed.connect(_on_threshold_changed);
 
 	
-	#call_deferred("_print_model_size_deferred")
+	call_deferred("_print_model_size_deferred")
 	#marker_target.scale = Vector3(0.045, 0.045, 0.045);
 	
+	## Settint the Info Text
+	sun_info_label.text = sun["info_text"] % sun["diameter_km"]
+	mercury_info_label.text = mercury["info_text"] % mercury["diameter_km"]
+	venus_info_label.text = venus["info_text"] % venus["diameter_km"]
+	earth_info_label.text = earth["info_text"] % earth["diameter_km"]
+	mars_info_label.text = mars["info_text"] % mars["diameter_km"]
+	jupiter_info_label.text = jupiter["info_text"] % jupiter["diameter_km"]
+	saturn_info_label.text = saturn["info_text"] % saturn["diameter_km"]
+	uranus_info_label.text = uranus["info_text"] % uranus["diameter_km"]
+	neptune_info_label.text = neptune["info_text"] % neptune["diameter_km"]
 	
 	
 func _process(delta):
@@ -254,8 +275,9 @@ func _on_timer_framerate():
 		transform_sun.basis.y *= scale_factor_sun
 		transform_sun.basis.z *= scale_factor_sun
 		sun_target.transform = transform_sun
-		
-		sun_target.visible = true;
+		if not sun_target.visible:
+			sun_target.visible = true
+			
 		if not well_done_shown:
 			show_well_done()
 			well_done_shown = true
@@ -267,24 +289,27 @@ func _on_timer_framerate():
 
 		sun_label3d.transform = transform_sun  # ✅ Corrected transform is set
 		sun_label3d.text = "Sun"
-		sun_label3d.visible = true
-		
-		
+		if not sun_label3d.visible:
+			sun_label3d.visible = true
+			
 		sun_info_label.transform = transform_sun.translated(Vector3(-0.04, -0.1, 0)) 
-		sun_info_label.text = "• type: star\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: contains ~99.8%% of all the mass\n    in the solar system" % sun["diameter_km"]
-
+		
 		sun_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		sun_info_label.visible = true
-
+		
+		if not sun_info_label.visible:
+			sun_info_label.visible = true
 	else:
-		# Sun
-		sun_target.visible = false
-		
-		#Label 3D
-		sun_label3d.visible = false
-		
-		sun_info_label.visible = false
+		if sun_target.visible:
+			# Sun
+			sun_target.visible = false
+			
+		if sun_label3d.visible:
+			# Label 3D
+			sun_label3d.visible = false
+			
+		if sun_info_label.visible:
+			# Info Text
+			sun_info_label.visible = false
 
 	
 	# ==== Mercury ====
@@ -302,8 +327,9 @@ func _on_timer_framerate():
 		transform_mercury.basis.z *= scale_factor_mercury
 		mercury_target.transform = transform_mercury
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		mercury_target.visible = true;
-		
+		if not mercury_target.visible:
+			mercury_target.visible = true
+			
 		# Label 3D
 		# Customize for label only:
 		transform_mercury.basis = Basis()  # Neutralize Rotation 
@@ -311,22 +337,26 @@ func _on_timer_framerate():
 
 		mercury_label3d.transform = transform_mercury  # ✅ Corrected transform is set
 		mercury_label3d.text = "Mercury"
-		mercury_label3d.visible = true
+		if not mercury_label3d.visible:
+			mercury_label3d.visible = true
 		
 		mercury_info_label.transform = transform_mercury.translated(Vector3(-0.04, -0.1, 0)) 
-		mercury_info_label.text = "• type: rocky planet\n• surface: cratered, with extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest and fastest planet" % mercury["diameter_km"]
-
+		
 		mercury_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		mercury_info_label.visible = true
+		
+		if not mercury_info_label.visible:
+			mercury_info_label.visible = true
 	else:
-		# Mercury
-		mercury_target.visible = false
+		if mercury_target.visible:
+			# Mercury
+			mercury_target.visible = false
 		
-		#Label 3D
-		mercury_label3d.visible = false
+		if mercury_label3d.visible:
+			#Label 3D
+			mercury_label3d.visible = false
 		
-		mercury_info_label.visible = false
+		if mercury_info_label.visible:
+			mercury_info_label.visible = false
 	
 	# ==== Venus ====
 	if camera.has_marker_transform(venus["marker_id"]):
@@ -344,8 +374,9 @@ func _on_timer_framerate():
 		transform_venus.basis.z *= scale_factor_venus
 		venus_target.transform = transform_venus
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		venus_target.visible = true;
-		
+		if not venus_target.visible:
+			venus_target.visible = true
+			
 		# Label 3D
 		# Customize for label only:
 		transform_venus.basis = Basis()  # Neutralize Rotation 
@@ -353,22 +384,27 @@ func _on_timer_framerate():
 
 		venus_label3d.transform = transform_venus  # ✅ Corrected transform is set
 		venus_label3d.text = "Venus"
-		venus_label3d.visible = true
-		
+		if not venus_label3d.visible:
+			venus_label3d.visible = true
+			
 		venus_info_label.transform = transform_venus.translated(Vector3(-0.04, -0.1, 0)) 
-		venus_info_label.text = "• type: rocky planet\n• surface: volcanic plains and mountains \n• diameter: %.0f km\n• fun fact: a day on this planet lasts longer than its year" % venus["diameter_km"]
-
+		
 		venus_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		venus_info_label.visible = true
+		
+		if not venus_info_label.visible:
+			venus_info_label.visible = true
 	else:
-		# Venus
-		venus_target.visible = false
+		if venus_target.visible:
+			# Venus
+			venus_target.visible = false
 		
-		#Label 3D
-		venus_label3d.visible = false
+		if venus_label3d.visible:
+			#Label 3D
+			venus_label3d.visible = false
 		
-		venus_info_label.visible = false
+		if venus_info_label.visible:
+			# Info Text
+			venus_info_label.visible = false
 	
 	# ==== Earth ====
 	if camera.has_marker_transform(earth["marker_id"]):
@@ -386,8 +422,9 @@ func _on_timer_framerate():
 		transform_earth.basis.z *= scale_factor_earth
 		earth_target.transform = transform_earth
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		earth_target.visible = true;
-		
+		if not earth_target.visible:
+			earth_target.visible = true
+			
 		# Label 3D
 		# Customize for label only:
 		transform_earth.basis = Basis()  # Neutralize Rotation 
@@ -395,22 +432,27 @@ func _on_timer_framerate():
 
 		earth_label3d.transform = transform_earth  # ✅ Corrected transform is set
 		earth_label3d.text = "Earth"
-		earth_label3d.visible = true
 		
+		if not earth_label3d.visible:
+			earth_label3d.visible = true
+			
 		earth_info_label.transform = transform_earth.translated(Vector3(-0.04, -0.1, 0)) 
-		earth_info_label.text = "• type: rocky planet\n• surface: mountains, valleys, volcanoes, liquid water \n• diameter: %.0f km\n• fun fact: the only known planet that supports life" % earth["diameter_km"]
-
+		
 		earth_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		earth_info_label.visible = true
+		
+		if not earth_info_label.visible:
+			earth_info_label.visible = true
 	else:
-		# Earth
-		earth_target.visible = false
+		if earth_target.visible:
+			# Earth
+			earth_target.visible = false
 		
-		#Label 3D
-		earth_label3d.visible = false
+		if earth_label3d.visible:
+			#Label 3D
+			earth_label3d.visible = false
 		
-		earth_info_label.visible = false
+		if earth_info_label.visible:
+			earth_info_label.visible = false
 	
 	# ==== Mars ====
 	if camera.has_marker_transform(mars["marker_id"]):
@@ -429,7 +471,8 @@ func _on_timer_framerate():
 		
 		mars_target.transform = transform_mars
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		mars_target.visible = true;
+		if not mars_target.visible:
+			mars_target.visible = true;
 		
 		# Label 3D
 		# Customize for label only:
@@ -438,22 +481,25 @@ func _on_timer_framerate():
 
 		mars_label3d.transform = transform_mars  # ✅ Corrected transform is set
 		mars_label3d.text = "Mars"
-		mars_label3d.visible = true
+		if not mars_label3d.visible:
+			mars_label3d.visible = true
 		
 		mars_info_label.transform = transform_mars.translated(Vector3(-0.04, -0.1, 0)) 
-		mars_info_label.text = "• type: rocky planet\n• surface: dusty, cold, desert world \n• diameter: %.0f km\n• fun fact: once had flowing rivers and lakes" % mars["diameter_km"]
-
+		
 		mars_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		mars_info_label.visible = true
+		if not mars_info_label.visible:
+			mars_info_label.visible = true
 	else:
-		# Mars
-		mars_target.visible = false
+		if mars_target.visible:
+			# Mars
+			mars_target.visible = false
 		
-		#Label 3D
-		mars_label3d.visible = false
+		if mars_label3d.visible:
+			#Label 3D
+			mars_label3d.visible = false
 		
-		mars_info_label.visible = false
+		if mars_info_label.visible:
+			mars_info_label.visible = false
 	
 	# ==== Jupiter ====
 	if camera.has_marker_transform(jupiter["marker_id"]):
@@ -471,7 +517,8 @@ func _on_timer_framerate():
 		transform_jupiter.basis.z *= scale_factor_jupiter
 		jupiter_target.transform = transform_jupiter
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		jupiter_target.visible = true;
+		if not jupiter_target.visible:
+			jupiter_target.visible = true;
 		
 		# Label 3D
 		# Customize for label only:
@@ -480,22 +527,25 @@ func _on_timer_framerate():
 
 		jupiter_label3d.transform = transform_jupiter  # ✅ Corrected transform is set
 		jupiter_label3d.text = "Jupiter"
-		jupiter_label3d.visible = true
+		if not jupiter_label3d.visible:
+			jupiter_label3d.visible = true
 		
 		jupiter_info_label.transform = transform_jupiter.translated(Vector3(-0.04, -0.1, 0)) 
-		jupiter_info_label.text = "• type: gas giant\n• composition: hydrogen, helium \n• diameter: %.0f km\n• fun fact: has a storm larger than Earth, raging for at least 350 years" % jupiter["diameter_km"]
-
+		
 		jupiter_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		jupiter_info_label.visible = true
+		if not jupiter_info_label.visible:
+			jupiter_info_label.visible = true
 	else:
-		# Jupiter
-		jupiter_target.visible = false
+		if jupiter_target.visible:
+			# Jupiter
+			jupiter_target.visible = false
+			
+		if jupiter_label3d.visible:
+			#Label 3D
+			jupiter_label3d.visible = false
 		
-		#Label 3D
-		jupiter_label3d.visible = false
-		
-		jupiter_info_label.visible = false
+		if jupiter_info_label.visible:
+			jupiter_info_label.visible = false
 	
 	# ==== Saturn ====
 	if camera.has_marker_transform(saturn["marker_id"]):
@@ -513,7 +563,8 @@ func _on_timer_framerate():
 		transform_saturn.basis.z *= scale_factor_saturn
 		saturn_target.transform = transform_saturn
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		saturn_target.visible = true;
+		if not saturn_target.visible:
+			saturn_target.visible = true;
 		
 		# Label 3D
 		# Customize for label only:
@@ -522,23 +573,26 @@ func _on_timer_framerate():
 
 		saturn_label3d.transform = transform_saturn  # ✅ Corrected transform is set
 		saturn_label3d.text = "Saturn"
-		saturn_label3d.visible = true
+		if not saturn_label3d.visible:
+			saturn_label3d.visible = true
 		
 		saturn_info_label.transform = transform_saturn.translated(Vector3(-0.04, -0.1, 0)) 
-		saturn_info_label.text = "• type: gas giant\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet from Earth discovered by the unaided human eye" % saturn["diameter_km"]
-
+		
 		saturn_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		saturn_info_label.visible = true
+		if not saturn_info_label:
+			saturn_info_label.visible = true
 	else:
-		# Saturn
-		saturn_target.visible = false
+		if saturn_target.visible:
+			# Saturn
+			saturn_target.visible = false
 		
-		#Label 3D
-		saturn_label3d.visible = false
+		if saturn_label3d.visible:
+			#Label 3D
+			saturn_label3d.visible = false
 		
-		saturn_info_label.visible = false
-			
+		if saturn_info_label.visible:
+			saturn_info_label.visible = false
+	
 	# ==== Uranus ====
 	if camera.has_marker_transform(uranus["marker_id"]):
 		# Uranus
@@ -561,7 +615,8 @@ func _on_timer_framerate():
 		transform_uranus.basis.z *= scale_factor_uranus
 		uranus_target.transform = transform_uranus
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		uranus_target.visible = true;
+		if not uranus_target.visible:
+			uranus_target.visible = true;
 		
 		# Label 3D
 		# Customize for label only:
@@ -570,22 +625,25 @@ func _on_timer_framerate():
 
 		uranus_label3d.transform = transform_uranus  # ✅ Corrected transform is set
 		uranus_label3d.text = "Uranus"
-		uranus_label3d.visible = true
+		if not uranus_label3d.visible:
+			uranus_label3d.visible = true
 		
 		uranus_info_label.transform = transform_uranus.translated(Vector3(-0.04, -0.1, 0)) 
-		uranus_info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane (which gives its blue color) \n• diameter: %.0f km\n• fun fact: has an extreme axial tilt of about 98 degrees, causing it to rotate nearly on its side" % uranus["diameter_km"]
-
+		
 		uranus_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		uranus_info_label.visible = true
+		if not uranus_info_label.visible:
+			uranus_info_label.visible = true
 	else:
-		# Uranus
-		uranus_target.visible = false
+		if uranus_target.visible:
+			# Uranus
+			uranus_target.visible = false
 		
-		#Label 3D
-		uranus_label3d.visible = false
+		if uranus_label3d.visible:
+			#Label 3D
+			uranus_label3d.visible = false
 		
-		uranus_info_label.visible = false
+		if uranus_info_label.visible:
+			uranus_info_label.visible = false
 	
 	# ==== Neptune ====
 	if camera.has_marker_transform(neptune["marker_id"]):
@@ -603,7 +661,8 @@ func _on_timer_framerate():
 		transform_neptune.basis.z *= scale_factor_neptune
 		neptune_target.transform = transform_neptune
 		#marker_target.transform = Transform3D(Basis(), transform.origin * 1.0) # Skaliere evtl.
-		neptune_target.visible = true;
+		if not neptune_target.visible:
+			neptune_target.visible = true;
 		
 		# Label 3D
 		# Customize for label only:
@@ -612,25 +671,40 @@ func _on_timer_framerate():
 
 		neptune_label3d.transform = transform_neptune  # ✅ Corrected transform is set
 		neptune_label3d.text = "Neptune"
-		neptune_label3d.visible = true
+		if not neptune_label3d.visible:
+			neptune_label3d.visible = true
 		
 		neptune_info_label.transform = transform_neptune.translated(Vector3(-0.04, -0.1, 0)) 
-		neptune_info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet in our solar system\n    in the solar system" % neptune["diameter_km"]
-
+		
 		neptune_info_label.scale = Vector3(0.05, 0.05, 0.05) 
-
-		neptune_info_label.visible = true
+		
+		if not neptune_info_label.visible:
+			neptune_info_label.visible = true
 	else:
-		# Neptune
-		neptune_target.visible = false
+		if neptune_target.visible:
+			# Neptune
+			neptune_target.visible = false
 		
-		#Label 3D
-		neptune_label3d.visible = false
+		if neptune_label3d.visible:
+			#Label 3D
+			neptune_label3d.visible = false
 		
-		neptune_info_label.visible = false
+		if neptune_info_label.visible:
+			neptune_info_label.visible = false
 			
 	var marker = camera.get_all_marker_ids();
-	print(marker) #90 626 1680 2884 4648 7236
+	#print(marker) #90 626 1680 2884 4648 7236
+	
+	#for planet_name in ordered:
+		#var is_correct = camera.is_planet_correctly_placed(planet_name, ordered)
+		#var label_node_name = planet_name.to_lower() + "_label3d"
+		#var label_node = get_node_or_null(label_node_name)
+#
+		#if label_node and label_node is Label3D:
+			#if is_correct:
+				#label_node.self_modulate = Color(0, 1, 0)  # Green
+			#else:
+				#label_node.self_modulate = Color(1, 0, 0)  # Red
 	
 func _on_threshold_changed(value : float):
 	camera.set_threshold(value);
@@ -663,21 +737,6 @@ func _print_model_size_deferred():
 			planet_models[i] = planet  # notwendig, um geändertes Dict zurück in die Liste zu schreiben
 		else:
 			print("❌ ", planet["name"], ": No mesh found")
-
-#const SUN_SCALE = 0.005  # beliebiger Sichtbarkeitsfaktor
-#
-#func get_planet_scale(
-	#planet_diameter_km: float, planet_aabb: float,
-	#sun_diameter_km: float, sun_aabb: float
-#) -> float:
-	#if planet_diameter_km == sun_diameter_km:
-		#return SUN_SCALE  # Sichtbarkeitsboost für Sonne
-	#
-	#var diameter_ratio = planet_diameter_km / sun_diameter_km
-	#var visual_ratio = pow(diameter_ratio, 0.4)
-	#var mesh_correction = sun_aabb / planet_aabb
-	#
-	#return min(visual_ratio * mesh_correction * SUN_SCALE, SUN_SCALE)
 
 func get_planet_scale(
 	planet_diameter_km: float, planet_aabb: float,

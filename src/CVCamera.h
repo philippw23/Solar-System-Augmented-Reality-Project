@@ -65,7 +65,7 @@ namespace godot
         float get_calculated_fov(godot::Camera3D* camera_node);
         void set_intrinsics(const cv::Mat &camera_matrix);
         cv::Mat get_intrinsics() const;
-
+        
     protected:
         static void _bind_methods();
 
@@ -87,6 +87,7 @@ namespace godot
         godot::Transform3D get_marker_transform(int marker_id);
         bool has_marker_transform(int marker_id);
         TypedArray<int> get_all_marker_ids() const;
+        bool is_planet_correctly_placed(const String& planet_name, const Array& ordered_names);
     };
     
 } // namespace godot

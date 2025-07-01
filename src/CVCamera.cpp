@@ -39,6 +39,7 @@ void CVCamera::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_height"), &CVCamera::get_height);
     ClassDB::bind_method(D_METHOD("get_calculated_fov"), &CVCamera::get_calculated_fov);  // optional
     //ClassDB::bind_method(D_METHOD("set_intrinsics"), &CVCamera::set_intrinsics);  // optional
+    ClassDB::bind_method(D_METHOD("is_planet_correctly_placed"), &CVCamera::is_planet_correctly_placed);
 }
 
 CVCamera::CVCamera()
@@ -63,6 +64,11 @@ void CVCamera::open(int device, int width = 1920, int height = 1080)
         UtilityFunctions::push_error("Couldn't open camera.");
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
+    if (framerate <= 1.0) {
+        // Fallback, falls OpenCV keine echte FPS liefert
+        framerate = 30.0; // oder 60.0, je nach deiner Kamera
+        UtilityFunctions::print("⚠️ OpenCV could not detect FPS. Using fallback: ", framerate);
+    }
 
     // 👇 Frame sofort holen (einmalig)
     capture.read(frame_raw);
@@ -93,6 +99,11 @@ void CVCamera::open_file(String path)
         UtilityFunctions::push_error("Couldn't open file.");
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
+    if (framerate <= 1.0) {
+        // Fallback, falls OpenCV keine echte FPS liefert
+        framerate = 30.0; // oder 60.0, je nach deiner Kamera
+        UtilityFunctions::print("⚠️ OpenCV could not detect FPS. Using fallback: ", framerate);
+    }
     video_file_playback = true;
 
 
@@ -888,4 +899,149 @@ void CVCamera::set_intrinsics(const cv::Mat &camera_matrix) {
 
 cv::Mat CVCamera::get_intrinsics() const {
     return intrinsics;
+}
+
+#include <tuple>
+#include <set>
+#include <string>
+#include <vector>
+#include <godot_cpp/variant/vector3.hpp>
+#include <algorithm>
+
+std::set<std::tuple<String, String, String>> correct_triplets;
+
+// bool CVCamera::is_planet_correctly_placed(const String& planet_name, const Array& ordered_names) {
+// 	std::map<String, int> planet_name_to_id = {
+// 		{"Sun", 4169}, {"Mercury", 4283}, {"Venus", 7332}, {"Earth", 22458},
+// 		{"Mars", 32523}, {"Jupiter", 12698}, {"Saturn", 19941},
+// 		{"Uranus", 21405}, {"Neptune", 21817}
+// 	};
+
+   
+
+// 	const float max_angle_deg = 15.0f;
+// 	const float dist_tolerance = 0.05f;
+
+// 	// Convert Array to Vector<String>
+// 	Vector<String> names;
+// 	for (int i = 0; i < ordered_names.size(); i++) {
+// 		names.push_back(ordered_names[i]);
+// 	}
+    
+// 	for (int i = 0; i + 2 < names.size(); ++i) {
+// 		String a = names[i];
+// 		String b = names[i + 1];
+// 		String c = names[i + 2];
+
+// 		if (a != planet_name && b != planet_name && c != planet_name)
+// 			continue;
+
+// 		if (!has_marker_transform(planet_name_to_id[a]) ||
+// 			!has_marker_transform(planet_name_to_id[b]) ||
+// 			!has_marker_transform(planet_name_to_id[c])) {
+// 			continue;
+// 		}
+    
+// 		Vector3 pos_a = get_marker_transform(planet_name_to_id[a]).origin;
+// 		Vector3 pos_b = get_marker_transform(planet_name_to_id[b]).origin;
+// 		Vector3 pos_c = get_marker_transform(planet_name_to_id[c]).origin;
+
+// 		Vector3 ab = (pos_b - pos_a).normalized();
+// 		Vector3 bc = (pos_c - pos_b).normalized();
+
+// 		float angle_rad = std::acos(std::clamp(ab.dot(bc), -1.0f, 1.0f));
+// 		float angle_deg = Math::rad_to_deg(angle_rad);
+        
+// 		if (angle_deg < max_angle_deg) {
+// 			float dist_ab = (pos_b - pos_a).length();
+// 			float dist_bc = (pos_c - pos_b).length();
+// 			float dist_ac = (pos_c - pos_a).length();
+
+// 			if (Math::is_equal_approx(dist_ac, dist_ab + dist_bc, dist_tolerance * dist_ac)) {
+// 				auto triplet = std::make_tuple(a, b, c);
+// 				correct_triplets.insert(triplet);
+// 				return true;
+// 			}
+// 		}
+// 	}
+    
+// 	for (const auto& t : correct_triplets) {
+// 		if (std::get<0>(t) == planet_name || std::get<1>(t) == planet_name || std::get<2>(t) == planet_name) {
+// 			return true;
+// 		}
+// 	}
+
+// 	return false;
+// }
+
+bool CVCamera::is_planet_correctly_placed(const String& planet_name, const Array& ordered_names) {
+	std::map<String, int> planet_name_to_id = {
+		{"Sun", 4169}, {"Mercury", 4283}, {"Venus", 7332}, {"Earth", 22458},
+		{"Mars", 32523}, {"Jupiter", 12698}, {"Saturn", 19941},
+		{"Uranus", 21405}, {"Neptune", 21817}
+	};
+
+	const float max_angle_deg = 15.0f;
+	const float dist_tolerance = 0.05f;
+
+	Vector<String> names;
+	for (int i = 0; i < ordered_names.size(); i++) {
+		names.push_back(ordered_names[i]);
+	}
+
+	for (int i = 0; i + 2 < names.size(); ++i) {
+		String a = names[i];
+		String b = names[i + 1];
+		String c = names[i + 2];
+
+		// Skip if any marker is missing
+		if (!has_marker_transform(planet_name_to_id[a]) ||
+			!has_marker_transform(planet_name_to_id[b]) ||
+			!has_marker_transform(planet_name_to_id[c])) {
+			continue;
+		}
+
+		Vector3 pos_a = get_marker_transform(planet_name_to_id[a]).origin;
+		Vector3 pos_b = get_marker_transform(planet_name_to_id[b]).origin;
+		Vector3 pos_c = get_marker_transform(planet_name_to_id[c]).origin;
+
+		Vector3 ab = (pos_b - pos_a).normalized();
+		Vector3 bc = (pos_c - pos_b).normalized();
+
+		float angle_rad = std::acos(std::clamp(ab.dot(bc), -1.0f, 1.0f));
+		float angle_deg = Math::rad_to_deg(angle_rad);
+
+		if (angle_deg >= max_angle_deg) continue;
+
+		float dist_ab = (pos_b - pos_a).length();
+		float dist_bc = (pos_c - pos_b).length();
+		float dist_ac = (pos_c - pos_a).length();
+		if (!Math::is_equal_approx(dist_ac, dist_ab + dist_bc, dist_tolerance * dist_ac)) continue;
+
+		// == SUN CASE ==
+		if (planet_name == "Sun") {
+			bool left = (a == "Sun" && b == "Mercury" && c == "Venus");
+			bool right = (a == "Venus" && b == "Mercury" && c == "Sun");
+			if (left || right) return true;
+		}
+		// == NEPTUNE CASE ==
+		else if (planet_name == "Neptune") {
+			bool left = (a == "Neptune" && b == "Uranus" && c == "Saturn");
+			bool right = (a == "Saturn" && b == "Uranus" && c == "Neptune");
+			if (left || right) return true;
+		}
+		// == GENERAL PLANETS ==
+		else if (b == planet_name) {
+			int idx = names.find(planet_name);
+			if (idx > 0 && idx < names.size() - 1) {
+				String left_expected = names[idx - 1];
+				String right_expected = names[idx + 1];
+				bool left_match = (a == left_expected || c == left_expected);
+				bool right_match = (a == right_expected || c == right_expected);
+				if (left_match && right_match) return true;
+			}
+		}
+	}
+
+	return false;
 }
