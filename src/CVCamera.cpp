@@ -125,7 +125,11 @@ void CVCamera::open(int device, int width = 1920, int height = 1080)
         UtilityFunctions::push_error("Couldn't open camera.");
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
-
+    if (framerate <= 1.0) {
+        // Fallback, falls OpenCV keine echte FPS liefert
+        framerate = 30.0; // oder 60.0, je nach deiner Kamera
+        UtilityFunctions::print("⚠️ OpenCV could not detect FPS. Using fallback: ", framerate);
+    }
     // 👇 Frame sofort holen (einmalig)
     capture.read(frame_raw);
     if (frame_raw.empty()) {
@@ -155,6 +159,11 @@ void CVCamera::open_file(String path)
         UtilityFunctions::push_error("Couldn't open file.");
     }
     framerate = capture.get(cv::CAP_PROP_FPS);
+    if (framerate <= 1.0) {
+        // Fallback, falls OpenCV keine echte FPS liefert
+        framerate = 30.0; // oder 60.0, je nach deiner Kamera
+        UtilityFunctions::print("⚠️ OpenCV could not detect FPS. Using fallback: ", framerate);
+    }
     video_file_playback = true;
 
 

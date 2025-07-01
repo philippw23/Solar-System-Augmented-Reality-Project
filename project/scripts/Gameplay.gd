@@ -907,12 +907,13 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	# ===== Info Label =====
 	#var info_transform = label_transform.translated(Vector3(-0.04, -0.1, 0))
 	var info_transform = label_transform
-	info_transform.origin += (
-		camera_node.transform.basis.x * -0.04 +
-		camera_node.transform.basis.y * -0.1
-	)
+	info_transform = info_transform.translated(Vector3(0, -0.12, 0))
+	#info_transform.origin += (
+		#camera_node.transform.basis.x * -0.04 +
+		#camera_node.transform.basis.y * -0.1
+	#)
 	info_label.transform = info_transform
-	info_label.scale = Vector3(0.05, 0.05, 0.05)
+	info_label.scale = Vector3(0.08, 0.08, 0.08)
 	info_label.visible = show_info
 	
 	# ===== 根据visible_now决定显示, 覆盖之前的设置 =====
