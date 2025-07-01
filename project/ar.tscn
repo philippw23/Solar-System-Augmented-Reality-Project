@@ -159,7 +159,6 @@ outline_size = 6
 [node name="Sun_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Sun_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
-visible = false
 
 [node name="sun_model" parent="UIRoot/SubViewportContainer/SubViewport/Sun_Marker3D" instance=ExtResource("3_haghx")]
 

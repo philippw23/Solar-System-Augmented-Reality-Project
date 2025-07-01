@@ -190,10 +190,11 @@ func _ready():
 	}
 	
 	## Live Feed Version
-	camera.open(0, 640, 480);
+	#camera.open(0, 640, 480);
 	# camera.open(0, 1900, 820);
 	
 	## Video Versions
+	camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_demo.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_victory.mp4");
@@ -770,16 +771,16 @@ func get_planet_scale(
 	planet_diameter_km: float, planet_aabb: float,
 	sun_diameter_km: float, sun_aabb: float
 ) -> float:
-	#if planet_diameter_km == sun_diameter_km:
-		#return SUN_SCALE
-#
-	#var diameter_ratio = planet_diameter_km / sun_diameter_km
-	#var visual_ratio = boosted_ratio(diameter_ratio)
-	#var mesh_correction = clamp(sun_aabb / planet_aabb, 0.1, 10.0)  # capped!
-#
-	#var scale = visual_ratio * mesh_correction * SUN_SCALE
-	#return clamp(scale, SUN_SCALE * 0.25, SUN_SCALE * 0.99)
-	return UNIFORM_TARGET_SIZE / planet_aabb
+	if planet_diameter_km == sun_diameter_km:
+		return 0.0031  # or 0.02, boost for visibility
+	if planet_diameter_km == neptune["diameter_km"]:
+		return 0.00031
+	if planet_diameter_km == uranus["diameter_km"]:
+		return 0.0001
+	if planet_diameter_km == jupiter["diameter_km"]:
+		return 0.003
+	var scale = UNIFORM_TARGET_SIZE / planet_aabb
+	return max(scale, 0.00005)  # tweak this if needed
 
 func boosted_ratio(d: float) -> float:
 	return 1.0 - exp(-d * 1000.0)
