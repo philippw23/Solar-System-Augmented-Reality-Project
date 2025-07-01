@@ -878,7 +878,6 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	T_world.basis.y *= scale
 	T_world.basis.z *= scale
 	target.transform = T_world
-	target.visible = true
 
 	# ===== Label 3D =====
 	var label_transform = T_world
@@ -902,6 +901,11 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	info_label.transform = info_transform
 	info_label.scale = Vector3(0.05, 0.05, 0.05)
 	info_label.visible = true
+	
+	# ===== 根据visible_now决定显示, 覆盖之前的设置 =====
+	target.visible = visible_now
+	label3d.visible = visible_now
+	info_label.visible = visible_now
 
 	# ✅ 文本匹配信息（按名称匹配）
 	match planet["name"]:
