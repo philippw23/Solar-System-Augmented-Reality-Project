@@ -161,7 +161,7 @@ var pose_stream : StreamPeerTCP = null
 var planet_labels = {}
 
 func _ready():
-	## 初始化与 SLAM 通信的 socket
+	## Initialize the socket for communication with SLAM.
 	camera.init_slam_socket("127.0.0.1", 5555) 
 	
 	# 添加这一段监听 Camera Pose
@@ -187,13 +187,13 @@ func _ready():
 	}
 	
 	## Live Feed Version
-	# camera.open(0, 640, 480);
+	camera.open(0, 640, 480);
 	# camera.open(0, 1900, 820);
 	
 	## Video Versions
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_demo.mp4");
-	camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_victory.mp4");
+	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_victory.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/env_scan.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/MarkerMovie.mp4");
 	#camera.open_file("C:/Users/Garrulus/Downloads/TUM/1.Semester/Solar-System-Augmented-Reality-Project/MarkerMovie.mp4");
@@ -306,12 +306,14 @@ func _on_timer_framerate():
 	update_planet_marker(neptune, neptune_target, neptune_label3d, neptune_info_label)
 	
 	var current_order = sort_planets_by_distance_to_sun()
-	var expected_order = ["Sun","Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
-	color_planet_labels(current_order, expected_order)
-	var is_correct: bool = current_order == expected_order
-	if is_correct and not well_done_shown:
-		show_well_done()
-		well_done_shown = true
+	if current_order != null:
+		# or skip coloring
+		var expected_order = ["Sun","Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+		color_planet_labels(current_order, expected_order)
+		var is_correct: bool = current_order == expected_order
+		if is_correct and not well_done_shown:
+			show_well_done()
+			well_done_shown = true
 	
 		
 	##
