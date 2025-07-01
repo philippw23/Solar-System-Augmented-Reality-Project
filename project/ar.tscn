@@ -34,7 +34,7 @@ depth_draw_mode = 1
 albedo_color = Color(1, 0.08, 0.08, 1)
 albedo_texture = SubResource("ViewportTexture_haghx")
 
-[node name="Project" type="Node3D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "sun_info_label", "mercury_target", "mercury_label3d", "mercury_info_label", "venus_target", "venus_label3d", "venus_info_label", "earth_target", "earth_label3d", "earth_info_label", "mars_target", "mars_label3d", "mars_info_label", "jupiter_target", "jupiter_label3d", "jupiter_info_label", "saturn_target", "saturn_label3d", "saturn_info_label", "uranus_target", "uranus_label3d", "uranus_info_label", "neptune_target", "neptune_label3d", "neptune_info_label")]
+[node name="Project" type="Node3D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "sun_info_label", "mercury_target", "mercury_label3d", "mercury_info_label", "venus_target", "venus_label3d", "venus_info_label", "earth_target", "earth_label3d", "earth_info_label", "mars_target", "mars_label3d", "mars_info_label", "jupiter_target", "jupiter_label3d", "jupiter_info_label", "saturn_target", "saturn_label3d", "saturn_info_label", "uranus_target", "uranus_label3d", "uranus_info_label", "neptune_target", "neptune_label3d", "neptune_info_label", "info_toggle_button", "box_target")]
 script = ExtResource("1_2ycnw")
 camera_canvas = NodePath("UIRoot/CameraCanvas")
 overlay_canvas = NodePath("UIRoot/OverlayCanvas")
@@ -68,6 +68,8 @@ uranus_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/uranus_inf
 neptune_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Marker3D")
 neptune_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Label3D")
 neptune_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/neptune_info_label")
+info_toggle_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/CheckButton-PlanetInfo")
+box_target = NodePath("UIRoot/SubViewportContainer/SubViewport/box_target")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
@@ -261,6 +263,9 @@ popup/item_2/text = "Threshold"
 popup/item_2/id = 2
 
 [node name="CheckButton-Overlay" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton-PlanetInfo" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
 layout_mode = 2
 
 [node name="VBoxContainer-MenuBottom" type="VBoxContainer" parent="UIRoot"]

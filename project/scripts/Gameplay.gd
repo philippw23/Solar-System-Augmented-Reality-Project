@@ -44,6 +44,7 @@ extends Node
 @export var neptune_target: Marker3D
 @export var neptune_label3d: Label3D
 @export var neptune_info_label: Label3D
+@export var info_toggle_button : CheckButton
 
 @export var box_target: Marker3D
 # 4169, 4282, 7215, 10571, 12438, 12698, 19941, 21405, 21817
@@ -201,8 +202,24 @@ func _ready():
 	
 	#call_deferred("_print_model_size_deferred")
 	#marker_target.scale = Vector3(0.045, 0.045, 0.045);
+	info_toggle_button.toggled.connect(Callable(self, "_on_info_toggle_button_toggled"))
 	
 	
+
+	
+func _on_info_toggle_button_toggled(pressed: bool) -> void:
+		_set_all_info_labels_visible(pressed)
+
+func _set_all_info_labels_visible(visible: bool) -> void:
+	sun_info_label.visible = visible
+	mercury_info_label.visible = visible
+	venus_info_label.visible = visible
+	earth_info_label.visible = visible
+	mars_info_label.visible = visible
+	jupiter_info_label.visible = visible
+	saturn_info_label.visible = visible
+	uranus_info_label.visible = visible
+	neptune_info_label.visible = visible
 	
 func _process(delta):
 	pass
@@ -270,11 +287,13 @@ func _on_timer_framerate():
 		
 		
 		sun_info_label.transform = transform_sun.translated(Vector3(-0.04, -0.1, 0)) 
-		sun_info_label.text = "• type: star\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: contains ~99.8%% of all the mass\n    in the solar system" % sun["diameter_km"]
+		sun_info_label.text = ("• type: star\n" + "• composition: hydrogen,\n"+" helium, traces of\n"+" other gases \n" + "• diameter: %.0f km\n" + "• fun fact: contains ~99.8%%\n"+" of all  mass in the\n"+" solar system" )% sun["diameter_km"]
 
 		sun_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		sun_info_label.visible = true
+		#sun_info_label.visible = true
+		sun_info_label.visible = info_toggle_button.button_pressed
+
 
 	else:
 		# Sun
@@ -313,11 +332,13 @@ func _on_timer_framerate():
 		mercury_label3d.visible = true
 		
 		mercury_info_label.transform = transform_mercury.translated(Vector3(-0.04, -0.1, 0)) 
-		mercury_info_label.text = "• type: rocky planet\n• surface: cratered, with extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest and fastest planet" % mercury["diameter_km"]
+		mercury_info_label.text = ("• type: rocky planet\n"+"• surface: cratered, with\n"+" extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest\n"+" and fastest planet") % mercury["diameter_km"]
 
 		mercury_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		mercury_info_label.visible = true
+		#mercury_info_label.visible = true
+		mercury_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Mercury
 		mercury_target.visible = false
@@ -355,11 +376,13 @@ func _on_timer_framerate():
 		venus_label3d.visible = true
 		
 		venus_info_label.transform = transform_venus.translated(Vector3(-0.04, -0.1, 0)) 
-		venus_info_label.text = "• type: rocky planet\n• surface: volcanic plains and mountains \n• diameter: %.0f km\n• fun fact: a day on this planet lasts longer than its year" % venus["diameter_km"]
+		venus_info_label.text = ("• type: rocky planet\n"+"• surface: volcanic\n"+" plains and mountains \n"+"• diameter: %.0f km\n"+"• fun fact: a day on this\n"+" planet lasts longer\n"+" than its year") % venus["diameter_km"]
 
 		venus_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		venus_info_label.visible = true
+		#venus_info_label.visible = true
+		venus_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Venus
 		venus_target.visible = false
@@ -397,11 +420,13 @@ func _on_timer_framerate():
 		earth_label3d.visible = true
 		
 		earth_info_label.transform = transform_earth.translated(Vector3(-0.04, -0.1, 0)) 
-		earth_info_label.text = "• type: rocky planet\n• surface: mountains, valleys, volcanoes, liquid water \n• diameter: %.0f km\n• fun fact: the only known planet that supports life" % earth["diameter_km"]
+		earth_info_label.text = ("• type: rocky planet\n• surface: mountains,\n"+" valleys, volcanoes,\n"+" liquid water \n• diameter: %.0f km\n• fun fact: the only known\n"+" planet that supports life") % earth["diameter_km"]
 
 		earth_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		earth_info_label.visible = true
+		#earth_info_label.visible = true
+		earth_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Earth
 		earth_target.visible = false
@@ -440,11 +465,13 @@ func _on_timer_framerate():
 		mars_label3d.visible = true
 		
 		mars_info_label.transform = transform_mars.translated(Vector3(-0.04, -0.1, 0)) 
-		mars_info_label.text = "• type: rocky planet\n• surface: dusty, cold, desert world \n• diameter: %.0f km\n• fun fact: once had flowing rivers and lakes" % mars["diameter_km"]
+		mars_info_label.text = ("• type: rocky planet\n• surface: dusty, cold,\n"+" desert world \n• diameter: %.0f km\n• fun fact: once had \n"+"flowing rivers and lakes") % mars["diameter_km"]
 
 		mars_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		mars_info_label.visible = true
+		#mars_info_label.visible = true
+		mars_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Mars
 		mars_target.visible = false
@@ -482,11 +509,13 @@ func _on_timer_framerate():
 		jupiter_label3d.visible = true
 		
 		jupiter_info_label.transform = transform_jupiter.translated(Vector3(-0.04, -0.1, 0)) 
-		jupiter_info_label.text = "• type: gas giant\n• composition: hydrogen, helium \n• diameter: %.0f km\n• fun fact: has a storm larger than Earth, raging for at least 350 years" % jupiter["diameter_km"]
+		jupiter_info_label.text = ("• type: gas giant\n"+"• composition: hydrogen,\n"+" helium \n"+"• diameter: %.0f km\n"+"• fun fact: has a storm larger\n"+" than Earth, raging for \n"+"at least 350 years") % jupiter["diameter_km"]
 
 		jupiter_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		jupiter_info_label.visible = true
+		#jupiter_info_label.visible = true
+		jupiter_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Jupiter
 		jupiter_target.visible = false
@@ -524,11 +553,13 @@ func _on_timer_framerate():
 		saturn_label3d.visible = true
 		
 		saturn_info_label.transform = transform_saturn.translated(Vector3(-0.04, -0.1, 0)) 
-		saturn_info_label.text = "• type: gas giant\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet from Earth discovered by the unaided human eye" % saturn["diameter_km"]
+		saturn_info_label.text = ("• type: gas giant\n• composition: hydrogen,\n"+" helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet \n"+"from Earth discovered by \n"+"the unaided human eye") % saturn["diameter_km"]
 
 		saturn_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		saturn_info_label.visible = true
+		#saturn_info_label.visible = true
+		saturn_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Saturn
 		saturn_target.visible = false
@@ -572,11 +603,13 @@ func _on_timer_framerate():
 		uranus_label3d.visible = true
 		
 		uranus_info_label.transform = transform_uranus.translated(Vector3(-0.04, -0.1, 0)) 
-		uranus_info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane (which gives its blue color) \n• diameter: %.0f km\n• fun fact: has an extreme axial tilt of about 98 degrees, causing it to rotate nearly on its side" % uranus["diameter_km"]
+		uranus_info_label.text = ("• type: ice giant\n• composition: hydrogen,\n"+" helium, methane \n"+"(which gives its blue color) \n• diameter: %.0f km\n• fun fact: has an extreme\n"+" axial tilt of about 98 degrees,\n"+" causing it to rotate nearly\n"+" on its side") % uranus["diameter_km"]
 
 		uranus_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		uranus_info_label.visible = true
+		#uranus_info_label.visible = true
+		uranus_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Uranus
 		uranus_target.visible = false
@@ -614,11 +647,13 @@ func _on_timer_framerate():
 		neptune_label3d.visible = true
 		
 		neptune_info_label.transform = transform_neptune.translated(Vector3(-0.04, -0.1, 0)) 
-		neptune_info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet in our solar system\n    in the solar system" % neptune["diameter_km"]
+		neptune_info_label.text = ("• type: ice giant\n• composition: hydrogen,\n"+" helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet\n"+" in our solar system" )% neptune["diameter_km"]
 
 		neptune_info_label.scale = Vector3(0.05, 0.05, 0.05) 
 
-		neptune_info_label.visible = true
+		#neptune_info_label.visible = true
+		neptune_info_label.visible = info_toggle_button.button_pressed
+
 	else:
 		# Neptune
 		neptune_target.visible = false
