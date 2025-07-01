@@ -8,12 +8,24 @@ Sandro Weber <sandro.weber@tum.de>
 #include "CVCamera.h"
 
 #include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <bitset>
 #include <opencv2/calib3d.hpp>
 #include <godot_cpp/classes/camera3d.hpp>
 #include <cmath>  // std::atan, std::atan2
+
+// STL and System includes
+#include <string>
+#include <vector>
+#include <cstring>
+
+// Socket（Linux/macOS）
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 using namespace godot;
 
@@ -39,6 +51,8 @@ void CVCamera::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_height"), &CVCamera::get_height);
     ClassDB::bind_method(D_METHOD("get_calculated_fov"), &CVCamera::get_calculated_fov);  // optional
     //ClassDB::bind_method(D_METHOD("set_intrinsics"), &CVCamera::set_intrinsics);  // optional
+    ClassDB::bind_method(D_METHOD("init_slam_socket", "ip", "port"), &CVCamera::init_slam_socket);
+
 }
 
 CVCamera::CVCamera()
@@ -50,6 +64,7 @@ CVCamera::CVCamera()
 CVCamera::~CVCamera()
 {
     close();
+    close_slam_socket(); // close the SLAM socket if it was opened
 }
 
 void CVCamera::open(int device, int width = 1920, int height = 1080)
@@ -157,6 +172,8 @@ void CVCamera::update_frame()
 
     frame_overlay = cv::Mat::zeros(frame_raw.size(), CV_8UC4);
     cv::cvtColor(frame_overlay, frame_overlay, cv::COLOR_BGRA2RGBA);
+
+    send_frame_to_slam();
 }
 
 Ref<Image> CVCamera::mat_to_image(cv::Mat mat)
@@ -889,3 +906,54 @@ void CVCamera::set_intrinsics(const cv::Mat &camera_matrix) {
 cv::Mat CVCamera::get_intrinsics() const {
     return intrinsics;
 }
+
+//  Initializes the SLAM socket connection
+void CVCamera::init_slam_socket(const String &ip, int port) {
+    std::string ip_str = ip.utf8().get_data();
+
+    slam_socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (slam_socket_fd < 0) {
+        UtilityFunctions::push_warning("Failed to create SLAM socket.");
+        return;
+    }
+
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port);
+    inet_pton(AF_INET, ip_str.c_str(), &server_addr.sin_addr);
+
+    if (::connect(slam_socket_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        UtilityFunctions::push_warning("Failed to connect to SLAM server.");
+        ::close(slam_socket_fd);
+        slam_socket_fd = -1;
+        return;
+    }
+
+    slam_connected = true;
+    UtilityFunctions::print("Connected to SLAM server.");
+}
+
+// Sends the current frame to the SLAM system
+void CVCamera::send_frame_to_slam() {
+    if (!slam_connected || frame_gray.empty()) return;
+
+    // 编码为 JPEG
+    std::vector<uchar> buf;
+    cv::imencode(".jpg", frame_gray, buf);
+
+    // 发送长度头 + 图像数据
+    int len = buf.size();
+    int len_net = htonl(len);
+    send(slam_socket_fd, &len_net, sizeof(len_net), 0);
+    send(slam_socket_fd, buf.data(), len, 0);
+}
+
+// Closes the SLAM socket connection
+void CVCamera::close_slam_socket() {
+    if (slam_connected) {
+        ::close(slam_socket_fd);
+        slam_socket_fd = -1;
+        slam_connected = false;
+    }
+}
+
