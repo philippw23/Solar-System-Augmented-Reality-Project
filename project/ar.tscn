@@ -2,26 +2,26 @@
 
 [ext_resource type="Script" uid="uid://ckwukosusmt8s" path="res://scripts/Gameplay.gd" id="1_2ycnw"]
 [ext_resource type="FontFile" uid="uid://bbp6hfeqa876q" path="res://Fonts/roboto_5/ttf/roboto-cyrillic-ext-400-normal.ttf" id="2_hi88e"]
-[ext_resource type="Texture2D" uid="uid://klj4swv8pt6g" path="res://great_job_frames/frame-01.png" id="2_i105u"]
+[ext_resource type="Texture2D" uid="uid://dmkem7xa4knvs" path="res://great_job_frames/frame-01.png" id="2_i105u"]
 [ext_resource type="PackedScene" uid="uid://dhvxjw7o6o34d" path="res://Meshes/Uranus/source/uranus.fbx" id="2_xtdpg"]
-[ext_resource type="Texture2D" uid="uid://bvr5ohmwk7owr" path="res://great_job_frames/frame-02.png" id="3_05qpr"]
+[ext_resource type="Texture2D" uid="uid://dd0ocxqi8x4ko" path="res://great_job_frames/frame-02.png" id="3_05qpr"]
 [ext_resource type="PackedScene" uid="uid://87r36f85kboj" path="res://Meshes/Sun/sun.glb" id="3_haghx"]
 [ext_resource type="PackedScene" uid="uid://bhrb7yrtyeft7" path="res://Meshes/Mercury/mercury.tscn" id="3_tcknp"]
 [ext_resource type="PackedScene" uid="uid://ulvwfjgs51i2" path="res://Meshes/Venus/venus.tscn" id="4_4rqip"]
-[ext_resource type="Texture2D" uid="uid://chlg02ghybwny" path="res://great_job_frames/frame-03.png" id="4_mfj8g"]
+[ext_resource type="Texture2D" uid="uid://bidbqskc130na" path="res://great_job_frames/frame-03.png" id="4_mfj8g"]
 [ext_resource type="PackedScene" uid="uid://dw6rhw8fxevd2" path="res://Meshes/Earth/earth.tscn" id="4_qclpm"]
 [ext_resource type="PackedScene" uid="uid://biege33kt2h5x" path="res://Meshes/Jupiter/jupiter.tscn" id="4_tcknp"]
-[ext_resource type="Texture2D" uid="uid://kmofoayfutsc" path="res://great_job_frames/frame-04.png" id="5_k3ma0"]
-[ext_resource type="Texture2D" uid="uid://bosbry7kto1py" path="res://great_job_frames/frame-05.png" id="6_imfla"]
-[ext_resource type="Texture2D" uid="uid://cfygri3atbukq" path="res://great_job_frames/frame-06.png" id="7_74idx"]
+[ext_resource type="Texture2D" uid="uid://bblvwm3l10oxq" path="res://great_job_frames/frame-04.png" id="5_k3ma0"]
+[ext_resource type="Texture2D" uid="uid://dxesvw6e0dlgj" path="res://great_job_frames/frame-05.png" id="6_imfla"]
+[ext_resource type="Texture2D" uid="uid://bneg1xbl05lrx" path="res://great_job_frames/frame-06.png" id="7_74idx"]
 [ext_resource type="PackedScene" uid="uid://jsqpjil51wg2" path="res://Meshes/Mars/mars.glb" id="7_kxbe2"]
-[ext_resource type="Texture2D" uid="uid://dm1nmoty7ln7j" path="res://great_job_frames/frame-07.png" id="8_p3a3y"]
-[ext_resource type="Texture2D" uid="uid://ddlsoui3bh1w5" path="res://great_job_frames/frame-08.png" id="9_y02j2"]
-[ext_resource type="Texture2D" uid="uid://btxuljufuqcw5" path="res://great_job_frames/frame-09.png" id="10_epear"]
+[ext_resource type="Texture2D" uid="uid://dui26xqohwtka" path="res://great_job_frames/frame-07.png" id="8_p3a3y"]
+[ext_resource type="Texture2D" uid="uid://c6kgfq1fd2ca7" path="res://great_job_frames/frame-08.png" id="9_y02j2"]
+[ext_resource type="Texture2D" uid="uid://bsom0vihnkaoy" path="res://great_job_frames/frame-09.png" id="10_epear"]
 [ext_resource type="PackedScene" uid="uid://78f6gfhrbwwe" path="res://Meshes/Neptune/neptune.glb" id="10_kxbe2"]
-[ext_resource type="Texture2D" uid="uid://b2inqw0i5lna6" path="res://great_job_frames/frame-10.png" id="11_gwi6t"]
-[ext_resource type="Texture2D" uid="uid://bsjxbfcowaybw" path="res://great_job_frames/frame-11.png" id="12_np8p8"]
-[ext_resource type="Texture2D" uid="uid://y671qnx4fc3g" path="res://great_job_frames/frame-12.png" id="13_ps2d1"]
+[ext_resource type="Texture2D" uid="uid://bnmwyima4p7ou" path="res://great_job_frames/frame-10.png" id="11_gwi6t"]
+[ext_resource type="Texture2D" uid="uid://6becwl7hxh8t" path="res://great_job_frames/frame-11.png" id="12_np8p8"]
+[ext_resource type="Texture2D" uid="uid://h0b53afc6w23" path="res://great_job_frames/frame-12.png" id="13_ps2d1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gitnh"]
 animations = [{
@@ -67,7 +67,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "mercury_target", "mercury_label3d", "venus_target", "venus_label3d", "earth_target", "earth_label3d", "mars_target", "mars_label3d", "jupiter_target", "jupiter_label3d", "saturn_target", "saturn_label3d", "uranus_target", "uranus_label3d", "neptune_target", "neptune_label3d")]
+[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "sun_info_label", "mercury_target", "mercury_label3d", "mercury_info_label", "venus_target", "venus_label3d", "venus_info_label", "earth_target", "earth_label3d", "earth_info_label", "mars_target", "mars_label3d", "mars_info_label", "jupiter_target", "jupiter_label3d", "jupiter_info_label", "saturn_target", "saturn_label3d", "saturn_info_label", "uranus_target", "uranus_label3d", "uranus_info_label", "neptune_target", "neptune_label3d", "neptune_info_label")]
 script = ExtResource("1_2ycnw")
 camera_canvas = NodePath("UIRoot/CameraCanvas")
 overlay_canvas = NodePath("UIRoot/OverlayCanvas")
@@ -76,22 +76,31 @@ mode_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/OptionButton-
 overlay_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/CheckButton-Overlay")
 sun_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Marker3D")
 sun_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Label3D")
+sun_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Info_Label3D")
 mercury_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Mercury_Marker3D")
 mercury_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Mercury_Label3D")
+mercury_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Mercury_Info_Label3D")
 venus_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Venus_Marker3D")
 venus_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Venus_Label3D")
+venus_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Venus_Info_Label3D")
 earth_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Earth_Marker3D")
 earth_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Earth_Label3D")
+earth_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Earth_Info_Label3D")
 mars_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Mars_Marker3D")
 mars_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Mars_Label3D")
+mars_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Mars_Info_Label3D")
 jupiter_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Jupiter_Marker3D")
 jupiter_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Juptier_Label3D")
+jupiter_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Jupiter_Info_Label3D")
 saturn_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Saturn_Marker3D")
 saturn_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Saturn_Label3D")
+saturn_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Saturn_Info_Label3D")
 uranus_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Uranus_Marker3D")
 uranus_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Uranus_Label3D")
+uranus_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Uranus_Info_Label3D")
 neptune_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Marker3D")
 neptune_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Label3D")
+neptune_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Neptune_Info_Label3D")
 
 [node name="UIRoot" type="Control" parent="."]
 layout_mode = 3
@@ -126,7 +135,6 @@ custom_minimum_size = Vector2(640, 360)
 layout_mode = 1
 offset_right = 640.0
 offset_bottom = 360.0
-stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UIRoot/SubViewportContainer"]
 transparent_bg = true
@@ -146,6 +154,8 @@ pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
 
+[node name="Sun_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
 [node name="Sun_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
 
@@ -157,6 +167,8 @@ pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
 
+[node name="Mercury_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
 [node name="Mercury_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="mercury_model" parent="UIRoot/SubViewportContainer/SubViewport/Mercury_Marker3D" instance=ExtResource("3_tcknp")]
@@ -166,6 +178,8 @@ visible = false
 pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
+
+[node name="Venus_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Venus_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
@@ -178,6 +192,8 @@ pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
 
+[node name="Earth_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
 [node name="Earth_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
 
@@ -188,6 +204,8 @@ visible = false
 pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
+
+[node name="Mars_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Mars_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
@@ -200,6 +218,8 @@ pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
 
+[node name="Jupiter_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
 [node name="Jupiter_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
 
@@ -211,6 +231,8 @@ pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
 
+[node name="Saturn_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
+
 [node name="Saturn_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
 
@@ -219,6 +241,8 @@ visible = false
 pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
+
+[node name="Uranus_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Uranus_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
@@ -230,6 +254,8 @@ visible = false
 pixel_size = 0.001
 font = ExtResource("2_hi88e")
 outline_size = 6
+
+[node name="Neptune_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Neptune_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false

@@ -13,7 +13,13 @@ Sandro Weber <sandro.weber@tum.de>
 #include <bitset>
 #include <opencv2/calib3d.hpp>
 #include <godot_cpp/classes/camera3d.hpp>
+#define _USE_MATH_DEFINES
 #include <cmath>  // std::atan, std::atan2
+
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 using namespace godot;
 
