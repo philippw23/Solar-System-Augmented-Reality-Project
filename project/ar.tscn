@@ -67,13 +67,15 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "sun_target", "sun_label3d", "sun_info_label", "mercury_target", "mercury_label3d", "mercury_info_label", "venus_target", "venus_label3d", "venus_info_label", "earth_target", "earth_label3d", "earth_info_label", "mars_target", "mars_label3d", "mars_info_label", "jupiter_target", "jupiter_label3d", "jupiter_info_label", "saturn_target", "saturn_label3d", "saturn_info_label", "uranus_target", "uranus_label3d", "uranus_info_label", "neptune_target", "neptune_label3d", "neptune_info_label")]
+[node name="Project" type="Node2D" node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "toggle_info_button", "play_again_button", "sun_target", "sun_label3d", "sun_info_label", "mercury_target", "mercury_label3d", "mercury_info_label", "venus_target", "venus_label3d", "venus_info_label", "earth_target", "earth_label3d", "earth_info_label", "mars_target", "mars_label3d", "mars_info_label", "jupiter_target", "jupiter_label3d", "jupiter_info_label", "saturn_target", "saturn_label3d", "saturn_info_label", "uranus_target", "uranus_label3d", "uranus_info_label", "neptune_target", "neptune_label3d", "neptune_info_label")]
 script = ExtResource("1_2ycnw")
 camera_canvas = NodePath("UIRoot/CameraCanvas")
 overlay_canvas = NodePath("UIRoot/OverlayCanvas")
 threshold_slider = NodePath("UIRoot/VBoxContainer-MenuBottom/PanelContainer/HBoxContainer/HSlider-Threshold")
 mode_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/OptionButton-ImageMode")
 overlay_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/CheckButton-Overlay")
+toggle_info_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/ToggleInfoButton")
+play_again_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/PlayAgainButton")
 sun_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Marker3D")
 sun_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Label3D")
 sun_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Info_Label3D")
@@ -282,6 +284,12 @@ popup/item_2/text = "Threshold"
 popup/item_2/id = 2
 
 [node name="CheckButton-Overlay" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+layout_mode = 2
+
+[node name="ToggleInfoButton" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayAgainButton" type="Button" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
 layout_mode = 2
 
 [node name="VBoxContainer-MenuBottom" type="VBoxContainer" parent="UIRoot"]
