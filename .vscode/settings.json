@@ -57,7 +57,8 @@
         "typeinfo": "cpp",
         "unordered_set": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "chrono": "cpp"
     },
     "cmake.sourceDirectory": "/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/gdextension_cpp_example copy/godot-cpp"
 }

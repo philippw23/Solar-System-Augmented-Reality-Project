@@ -19,6 +19,16 @@ Sandro Weber <sandro.weber@tum.de>
 #include <map>
 #include <godot_cpp/classes/camera3d.hpp>
 
+#ifdef _WIN32
+  #include <winsock2.h>
+  #pragma comment(lib, "ws2_32.lib")  
+#else
+  #include <sys/socket.h>
+  #include <netinet/in.h>
+  #include <arpa/inet.h>
+  #include <unistd.h>
+#endif
+
 struct StripDimensions
 {
     int stripLength;
@@ -49,6 +59,9 @@ namespace godot
         double framerate;
         double threshold;
         cv::Mat intrinsics;
+        int slam_socket_fd = -1;
+        bool slam_connected = false;
+
 
         void update_frame();
         Ref<Image> mat_to_image(cv::Mat mat);
@@ -65,6 +78,7 @@ namespace godot
         float get_calculated_fov(godot::Camera3D* camera_node);
         void set_intrinsics(const cv::Mat &camera_matrix);
         cv::Mat get_intrinsics() const;
+        void send_frame_to_slam(); 
 
     protected:
         static void _bind_methods();
@@ -87,6 +101,8 @@ namespace godot
         godot::Transform3D get_marker_transform(int marker_id);
         bool has_marker_transform(int marker_id);
         TypedArray<int> get_all_marker_ids() const;
+        void init_slam_socket(const String &ip, int port); 
+        void close_slam_socket();
     };
     
 } // namespace godot
