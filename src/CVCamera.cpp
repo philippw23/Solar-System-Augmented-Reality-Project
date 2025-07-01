@@ -70,7 +70,7 @@ void close_socket(int fd) {
     closesocket(fd);
 #else
     close(fd);
-#endif;
+#endif
 #endif
 }
 
@@ -974,7 +974,7 @@ if (::connect(slam_socket_fd, (struct sockaddr *)&server_addr, sizeof(server_add
 #ifdef _WIN32
     closesocket(slam_socket_fd);
 #else
-    close(slam_socket_fd);
+    ::close(slam_socket_fd);
 #endif
     slam_socket_fd = -1;
     return;
@@ -1005,7 +1005,7 @@ void CVCamera::close_slam_socket() {
 #ifdef _WIN32
         closesocket(slam_socket_fd);
 #else
-        close(slam_socket_fd);
+        ::close(slam_socket_fd);
 #endif
         slam_socket_fd = -1;
         slam_connected = false;

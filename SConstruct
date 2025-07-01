@@ -25,14 +25,21 @@ elif arch == "x86_64":
 
 # set this path to your library files. This is the location of dll, dylib and so files.
 library_paths = [
-    'opencv/build/x64/vc16/lib'
+    #'opencv/build/x64/vc16/lib'
+    #'/usr/local/Cellar/opencv/4.11.0_1/lib'
+    #"opencv/4.11.0_1/lib"
+    "/opt/homebrew/lib"
 ]
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
 header_paths = [
     "src/",
-    "opencv/build/include"
+    "/opt/homebrew/include/opencv4"
+    #"opencv/4.11.0_1/include/opencv4"
+    #"opencv/build/include"
+    #"/usr/local/Cellar/opencv/4.11.0_1/lib"
 ]
+
 
 library_files = {
     'windows': [
