@@ -112,7 +112,7 @@ var planet_models = [
 		"path": NodePath("SubViewportContainer/SubViewport/Saturn_Marker3D/saturn_model"),
 		"label": saturn_label3d,
 		"diameter_km": 116460.0,
-		"aabb_size": Vector3(120457.7, 120469.0, 112034.2)
+		"aabb_size": Vector3(120457.7, 120469.0, 112034.2) #not correct
 		# Saturn: mesh = 0, AABB = (120457.7, 120469.0, 112034.2)
 	},
 	{
@@ -136,7 +136,7 @@ var planet_models = [
 ]
 
 const SUN_SCALE = 0.005
-const UNIFORM_TARGET_SIZE = 0.0005  # Adjust as needed for visibility
+const UNIFORM_TARGET_SIZE = 0.00062  # Adjust as needed for visibility
 
 var sun = get_planet_by_name("Sun")
 var mercury = get_planet_by_name("Mercury")
@@ -752,21 +752,6 @@ func _print_model_size_deferred():
 		else:
 			print("❌ ", planet["name"], ": No mesh found")
 
-#const SUN_SCALE = 0.005  # beliebiger Sichtbarkeitsfaktor
-#
-#func get_planet_scale(
-	#planet_diameter_km: float, planet_aabb: float,
-	#sun_diameter_km: float, sun_aabb: float
-#) -> float:
-	#if planet_diameter_km == sun_diameter_km:
-		#return SUN_SCALE  # Sichtbarkeitsboost für Sonne
-	#
-	#var diameter_ratio = planet_diameter_km / sun_diameter_km
-	#var visual_ratio = pow(diameter_ratio, 0.4)
-	#var mesh_correction = sun_aabb / planet_aabb
-	#
-	#return min(visual_ratio * mesh_correction * SUN_SCALE, SUN_SCALE)
-
 func get_planet_scale(
 	planet_diameter_km: float, planet_aabb: float,
 	sun_diameter_km: float, sun_aabb: float
@@ -778,7 +763,9 @@ func get_planet_scale(
 	if planet_diameter_km == uranus["diameter_km"]:
 		return 0.0001
 	if planet_diameter_km == jupiter["diameter_km"]:
-		return 0.003
+		return 0.002
+	if planet_diameter_km == saturn["diameter_km"]:
+		return 0.00031
 	var scale = UNIFORM_TARGET_SIZE / planet_aabb
 	return max(scale, 0.00005)  # tweak this if needed
 
@@ -908,7 +895,7 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	# ===== Info Label =====
 	#var info_transform = label_transform.translated(Vector3(-0.04, -0.1, 0))
 	var info_transform = label_transform
-	info_transform = info_transform.translated(Vector3(0, -0.12, 0))
+	info_transform = info_transform.translated(Vector3(0, -0.15, 0))
 	#info_transform.origin += (
 		#camera_node.transform.basis.x * -0.04 +
 		#camera_node.transform.basis.y * -0.1
@@ -925,23 +912,69 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	# ✅ 文本匹配信息（按名称匹配）
 	match planet["name"]:
 		"Sun":
-			info_label.text = "• type: star\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: contains ~99.8%% of all the mass\n    in the solar system" % planet["diameter_km"]
+			info_label.text = ("• type: star\n"
+				+ "• composition: hydrogen,\n"
+				+ "  helium, traces of gases\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: contains ~99.8%%\n"
+				+ "  of the mass in the solar\n"
+				+ "  system") % sun["diameter_km"] #"• type: star\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: contains ~99.8%% of all the mass\n    in the solar system" % planet["diameter_km"]
 		"Mercury":
-			info_label.text = "• type: rocky planet\n• surface: cratered, with extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest and fastest planet" % planet["diameter_km"]
+			info_label.text = ("• type: rocky planet\n"
+				+ "• surface: cratered, with\n"
+				+ "  extreme temp. variations\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: smallest and\n"
+				+ "  fastest planet") % mercury["diameter_km"] # "• type: rocky planet\n• surface: cratered, with extreme temperature shifts \n• diameter: %.0f km\n• fun fact: the smallest and fastest planet" % planet["diameter_km"]
 		"Venus":
-			info_label.text = "• type: rocky planet\n• surface: volcanic plains and mountains \n• diameter: %.0f km\n• fun fact: a day on this planet lasts longer than its year" % planet["diameter_km"]
+			info_label.text = ("• type: rocky planet\n"
+				+ "• surface: volcanic plains\n"
+				+ "  and highlands\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: a day lasts\n"
+				+ "  longer than a year") % venus["diameter_km"] #"• type: rocky planet\n• surface: volcanic plains and mountains \n• diameter: %.0f km\n• fun fact: a day on this planet lasts longer than its year" % planet["diameter_km"]
 		"Earth":
-			info_label.text = "• type: rocky planet\n• surface: mountains, valleys, volcanoes, liquid water \n• diameter: %.0f km\n• fun fact: the only known planet that supports life" % planet["diameter_km"]
+			info_label.text = ("• type: rocky planet\n"
+				+ "• surface: oceans, valleys,\n"
+				+ "  mountains, volcanoes\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: only known\n"
+				+ "  planet with life") % earth["diameter_km"] #"• type: rocky planet\n• surface: mountains, valleys, volcanoes, liquid water \n• diameter: %.0f km\n• fun fact: the only known planet that supports life" % planet["diameter_km"]
 		"Mars":
-			info_label.text = "• type: rocky planet\n• surface: dusty, cold, desert world \n• diameter: %.0f km\n• fun fact: once had flowing rivers and lakes" % planet["diameter_km"]
+			info_label.text =  ("• type: rocky planet\n"
+				+ "• surface: dusty desert with\n"
+				+ "  cold temperatures\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: once had rivers\n"
+				+ "  and lakes") % mars["diameter_km"]#"• type: rocky planet\n• surface: dusty, cold, desert world \n• diameter: %.0f km\n• fun fact: once had flowing rivers and lakes" % planet["diameter_km"]
 		"Jupiter":
-			info_label.text = "• type: gas giant\n• composition: hydrogen, helium \n• diameter: %.0f km\n• fun fact: has a storm larger than Earth, raging for at least 350 years" % planet["diameter_km"]
+			info_label.text = ("• type: gas giant\n"
+				+ "• composition: hydrogen,\n"
+				+ "  helium\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: hosts a storm\n"
+				+ "  bigger than Earth") % jupiter["diameter_km"] #"• type: gas giant\n• composition: hydrogen, helium \n• diameter: %.0f km\n• fun fact: has a storm larger than Earth, raging for at least 350 years" % planet["diameter_km"]
 		"Saturn":
-			info_label.text = "• type: gas giant\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet from Earth discovered by the unaided human eye" % planet["diameter_km"]
+			info_label.text = ("• type: gas giant\n"
+				+ "• composition: hydrogen,\n"
+				+ "  helium, trace gases\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: farthest planet\n"
+				+ "  visible to naked eye") % saturn["diameter_km"] #"• type: gas giant\n• composition: hydrogen, helium, traces of other gases \n• diameter: %.0f km\n• fun fact: farthest planet from Earth discovered by the unaided human eye" % planet["diameter_km"]
 		"Uranus":
-			info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane (blue color) \n• diameter: %.0f km\n• fun fact: axial tilt ~98°, it rolls on its side!" % planet["diameter_km"]
+			info_label.text = ("• type: ice giant\n"
+				+ "• composition: hydrogen,\n"
+				+ "  helium, methane\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: tilted ~98°,\n"
+				+ "  it rolls on its side") % uranus["diameter_km"] # "• type: ice giant\n• composition: hydrogen, helium, methane (blue color) \n• diameter: %.0f km\n• fun fact: axial tilt ~98°, it rolls on its side!" % planet["diameter_km"]
 		"Neptune":
-			info_label.text = "• type: ice giant\n• composition: hydrogen, helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet in the solar system" % planet["diameter_km"]
+			info_label.text = ("• type: ice giant\n"
+				+ "• composition: hydrogen,\n"
+				+ "  helium, methane\n"
+				+ "• diameter: %.0f km\n"
+				+ "• fun fact: has the fastest\n"
+				+ "  winds in the solar system") % neptune["diameter_km"] #"• type: ice giant\n• composition: hydrogen, helium, methane \n• diameter: %.0f km\n• fun fact: the windiest planet in the solar system" % planet["diameter_km"]
 		_:
 			info_label.text = "• type: unknown\n• diameter: %.0f km\n• info not available" % planet["diameter_km"]
 

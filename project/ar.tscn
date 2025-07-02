@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://trsml2gs8ogq"]
+[gd_scene load_steps=25 format=3 uid="uid://trsml2gs8ogq"]
 
 [ext_resource type="Script" uid="uid://ckwukosusmt8s" path="res://scripts/Gameplay.gd" id="1_2ycnw"]
 [ext_resource type="FontFile" uid="uid://bbp6hfeqa876q" path="res://Fonts/roboto_5/ttf/roboto-cyrillic-ext-400-normal.ttf" id="2_hi88e"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bnmwyima4p7ou" path="res://great_job_frames/frame-10.png" id="11_gwi6t"]
 [ext_resource type="Texture2D" uid="uid://6becwl7hxh8t" path="res://great_job_frames/frame-11.png" id="12_np8p8"]
 [ext_resource type="Texture2D" uid="uid://h0b53afc6w23" path="res://great_job_frames/frame-12.png" id="13_ps2d1"]
+[ext_resource type="PackedScene" uid="uid://cpjlrqjkp3e2h" path="res://Meshes/Saturn/saturn.glb" id="21_05qpr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gitnh"]
 animations = [{
@@ -235,7 +236,8 @@ outline_size = 6
 [node name="Saturn_Info_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 
 [node name="Saturn_Marker3D" type="Marker3D" parent="UIRoot/SubViewportContainer/SubViewport"]
-visible = false
+
+[node name="saturn_model" parent="UIRoot/SubViewportContainer/SubViewport/Saturn_Marker3D" instance=ExtResource("21_05qpr")]
 
 [node name="Uranus_Label3D" type="Label3D" parent="UIRoot/SubViewportContainer/SubViewport"]
 visible = false
