@@ -195,7 +195,8 @@ func _ready():
 	
 	## Video Versions
 	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Solar_System_Test.mp4");
-	camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Play_again_Test_video.mp4");
+	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Play_again_Test_video.mp4");
+	camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Play_again_Test_video.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_demo.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_victory.mp4");
@@ -718,7 +719,7 @@ func _on_timer_framerate():
 		#
 		#neptune_info_label.visible = false
 			
-	var marker = camera.get_all_marker_ids();
+	#var marker = camera.get_all_marker_ids();
 	#print(marker) #90 626 1680 2884 4648 7236
 	
 func _on_threshold_changed(value : float):
@@ -773,9 +774,9 @@ func get_planet_scale(
 func boosted_ratio(d: float) -> float:
 	return 1.0 - exp(-d * 1000.0)
 	
-func get_planet_by_name(name: String) -> Dictionary:
+func get_planet_by_name(planet_name: String) -> Dictionary:
 	for planet in planet_models:
-		if planet["name"] == name:
+		if planet["name"] == planet_name:
 			return planet
 	return {}
 
@@ -804,17 +805,24 @@ func show_well_done():
 
 func _on_PlayAgainButton_pressed():
 	well_done_shown = false
+	for i in range(planet_models.size()):
+		var planet = planet_models[i]
+		if planet.has("last_world_transform"):
+			planet.erase("last_world_transform")
+			planet_models[i] = planet
+	print("Let‘s Play Again!")
 
 func _parse_and_apply_pose(data: String):
-	# 把接收到的字符串按空格切开，得到一个 17 个元素的列表（1 个时间戳 + 12 个旋转矩阵元素 + 3 个平移向量）。
+	# Split the received string by spaces to obtain a list with 17 elements 
+	# (1 timestamp, 12 rotation matrix elements, and 3 translation vector components).
 	var parts = data.strip_edges().split(" ")
 	if parts.size() != 17:
 		push_warning("⚠️ Invalid pose data received")
 		return
 		
 	var timestamp = parts[0].to_float()
-	var basis := Basis()  # 构造 Basis 对象（3x3 旋转矩阵）
-	var origin := Vector3()  # 平移向量 origin 的构造
+	var basis := Basis()  # 3x3 Rotation Matrix
+	var origin := Vector3()  # 1x3 Translation Vector
 	for i in range(3):
 		for j in range(3):
 			basis[j][i] = parts[1 + i * 4 + j].to_float()
@@ -824,18 +832,19 @@ func _parse_and_apply_pose(data: String):
 	#print("📈 Basis:", basis)
 	#print("📍 Origin:", origin)
 	
-	# 创建出一个完整的 4x4 位姿矩阵，表示相机的位置和朝向。
+	# T represent the camera’s position and orientation from SLAM.
 	var T := Transform3D(basis, origin)
-	# 把这个变换 应用到 Godot 场景中的 Camera3D 节点，使得 Godot 中的虚拟摄像机位置同步到 SLAM 实际估算的位置。
-	var cam_node := $UIRoot/SubViewportContainer/SubViewport/Camera3D
-	if cam_node:
-		cam_node.transform = T
+	# Apply this SLAM transformation to the Camera3D node in Godot, 
+	# syncing the virtual camera’s position with the SLAM-estimated position.
+	var camera_node := $UIRoot/SubViewportContainer/SubViewport/Camera3D
+	if camera_node:
+		camera_node.transform = T
 
 func get_marker_world_transform(marker_id: int) -> Transform3D:
 	if not camera.has_marker_transform(marker_id):
 		return Transform3D.IDENTITY
 		
-	var flip := Basis(Vector3(1,0,0), Vector3(0,-1,0), Vector3(0,0,-1))
+	#var flip := Basis(Vector3(1,0,0), Vector3(0,-1,0), Vector3(0,0,-1))
 
 	var T_marker_cam: Transform3D = camera.get_marker_transform(marker_id)
 
@@ -854,15 +863,15 @@ func get_marker_world_transform(marker_id: int) -> Transform3D:
 	
 func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D, info_label: Label3D):
 	var visible_now := camera.has_marker_transform(planet["marker_id"])
-	var T_world: Transform3D  # ✅ 提前声明
-	# ✅ 使用 SLAM 获取当前世界坐标
+	var T_world: Transform3D  
+	# Get the current world coordinates using SLAM
 	if visible_now:
 		T_world = get_marker_world_transform(planet["marker_id"])
-		planet["last_world_transform"] = T_world  # 🧠 缓存
+		planet["last_world_transform"] = T_world  
 	else:
-		T_world = planet.get("last_world_transform", Transform3D.IDENTITY)
-		# T_world = Transform3D.IDENTITY
-		if T_world == Transform3D.IDENTITY:
+		if planet.has("last_world_transform"):
+			T_world = planet["last_world_transform"]
+		else:
 			target.visible = false
 			label3d.visible = false
 			info_label.visible = false
@@ -905,12 +914,12 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	info_label.scale = Vector3(0.08, 0.08, 0.08)
 	info_label.visible = show_info
 	
-	# ===== 根据visible_now决定显示, 覆盖之前的设置 =====
+	# ===== Setting visibility depending on visible_now, override the previous setting =====
 	target.visible = visible_now
 	label3d.visible = visible_now
 	info_label.visible = visible_now and show_info
 
-	# ✅ 文本匹配信息（按名称匹配）
+	# Text matching information (matching by name)
 	match planet["name"]:
 		"Sun":
 			info_label.text = ("• type: star\n"
@@ -1002,7 +1011,7 @@ func sort_planets_by_distance_to_sun():
 		var distance = sun_transform.origin.distance_to(last_transform.origin)
 		distances.append({"name": planet["name"], "distance": distance})
 
-	# 按距离排序
+	# Sort by distance
 	distances.sort_custom(func(a, b): return a["distance"] < b["distance"])
 	
 	# Print Distances
@@ -1023,9 +1032,7 @@ func color_planet_labels(current_order: Array, expected_order: Array):
 			print("No Label")
 			continue
 
-		# 期望的位置
 		var expected_index = expected_order.find(planet_name)
-		# 当前的位置
 		var current_index = current_order.find(planet_name)
 		#print("index compare: expected: ", expected_index, ", current: ", current_index)
 		

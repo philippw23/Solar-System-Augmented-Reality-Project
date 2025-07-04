@@ -79,4 +79,7 @@ None
 ✨ Author
 
 Philipp Wiese
-github.com/philippw23
+https://github.com/philippw23
+
+Haoliang Huang
+https://github.com/Virlight
