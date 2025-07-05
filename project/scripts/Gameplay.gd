@@ -11,6 +11,10 @@ extends Node
 @export var overlay_button : CheckButton;
 @export var toggle_info_button : CheckButton;
 @export var play_again_button : Button;
+@export var tutorial_popup: Window
+@export var tutorial_text: RichTextLabel
+@export var tutorial_button: Button;
+@export var tutorial_vbox_container: MarginContainer;
 @export_group("3d Marker Augmentation")
 @export var sun_target: Marker3D
 @export var sun_label3d: Label3D
@@ -190,13 +194,13 @@ func _ready():
 	}
 	
 	## Live Feed Version
-	#camera.open(0, 640, 480);
+	camera.open(0, 640, 480);
 	# camera.open(0, 1900, 820);
 	
 	## Video Versions
 	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/philippwiese/Documents/Uni/Master/2.Semester/Erweiterte Realität/Solar System Project/Play_again_Test_video.mp4");
-	camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Play_again_Test_video.mp4");
+	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Play_again_Test_video.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/Solar_System_Test.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_demo.mp4");
 	#camera.open_file("/Users/haoliang/Projects/student.tum.edu/Solar-System-Augmented-Reality-Project/game_victory.mp4");
@@ -228,6 +232,27 @@ func _ready():
 	camera_canvas.size = Vector2(cam_width, cam_height)
 	overlay_canvas.size = Vector2(cam_width, cam_height)
 	
+	## Tutorial Popup Window
+	var popup_size = Vector2(cam_width - 60, cam_height - 120)
+	tutorial_popup.size = popup_size
+	tutorial_vbox_container.size = popup_size
+	# Style-Sicherheit für Anzeige
+	tutorial_text.bbcode_enabled = true
+	tutorial_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	tutorial_text.add_theme_color_override("default_color", Color(1, 1, 1)) # weiß
+	tutorial_text.text = "[center][b]Welcome to the Solar System AR Experience![/b][/center]\n\n"\
+		+ "In this interactive project, you'll get to explore our solar system in a fun and immersive way.\n\n"\
+		+ "Simply point your camera at the different markers to bring each planet to life. As each marker is recognized, "\
+		+ "a detailed 3D model of the planet will appear on screen — along with fun and fascinating facts that help you learn more about our cosmic neighbours.\n\n"\
+		+ "Once you've explored them all, it's time for a challenge:\n"\
+		+ "Can you arrange the planets in the correct order from the Sun?\n\n"\
+		+ "Fix your camera in place, then try placing all nine markers (including the Sun) on a flat surface in the correct sequence — from Mercury all the way to Neptune.\n\n"\
+		+ "Use what you’ve learned and test your knowledge!\n\n"\
+		+ "[i]Get ready for an exciting journey through space — and have fun exploring![/i]"
+	
+	## Position innerhalb des CameraCanvas mittig setzen
+	tutorial_popup.position = camera_canvas.global_position + (camera_canvas.size - popup_size) / 2
+	
 	# Setting FOV of the virtual Camera
 	var godot_camera_3d = $UIRoot/SubViewportContainer/SubViewport/Camera3D as Camera3D
 	var fov_y = camera.get_calculated_fov(godot_camera_3d)
@@ -257,6 +282,9 @@ func _ready():
 	
 	play_again_button.pressed.connect(_on_PlayAgainButton_pressed);
 	play_again_button.text = "Play Again"; 
+	
+	tutorial_button.pressed.connect(_on_Tutorial_pressed);
+	tutorial_button.text = "Show Tutorial";
 	
 	#call_deferred("_print_model_size_deferred")
 	#marker_target.scale = Vector3(0.045, 0.045, 0.045);
@@ -811,6 +839,13 @@ func _on_PlayAgainButton_pressed():
 			planet.erase("last_world_transform")
 			planet_models[i] = planet
 	print("Let‘s Play Again!")
+	
+func _on_Tutorial_pressed():
+	if tutorial_popup and tutorial_text:
+		tutorial_popup.visible = true
+	else:
+		push_warning("⚠️ Tutorial popup or text is not assigned!")
+	
 
 func _parse_and_apply_pose(data: String):
 	# Split the received string by spaces to obtain a list with 17 elements 
@@ -1059,3 +1094,7 @@ func _update_info_visibility():
 	saturn_info_label.visible = show_info
 	uranus_info_label.visible = show_info
 	neptune_info_label.visible = show_info
+
+
+func _on_tutorial_popup_close_requested() -> void:
+	pass # Replace with function body.
