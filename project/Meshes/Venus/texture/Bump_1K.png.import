@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://op8es8r5ae0v"
 path.s3tc="res://.godot/imported/Bump_1K.png-dba305675d541afb525ec76053a32e3f.s3tc.ctex"
+path.etc2="res://.godot/imported/Bump_1K.png-dba305675d541afb525ec76053a32e3f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Venus/texture/Bump_1K.png"
-dest_files=["res://.godot/imported/Bump_1K.png-dba305675d541afb525ec76053a32e3f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bump_1K.png-dba305675d541afb525ec76053a32e3f.s3tc.ctex", "res://.godot/imported/Bump_1K.png-dba305675d541afb525ec76053a32e3f.etc2.ctex"]
 
 [params]
 

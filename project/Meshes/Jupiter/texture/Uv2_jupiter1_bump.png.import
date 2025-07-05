@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckkxebspix7tr"
 path.s3tc="res://.godot/imported/Uv2_jupiter1_bump.png-0b146f1a8bf298a25b3fa54d0f5d9edf.s3tc.ctex"
+path.etc2="res://.godot/imported/Uv2_jupiter1_bump.png-0b146f1a8bf298a25b3fa54d0f5d9edf.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Jupiter/texture/Uv2_jupiter1_bump.png"
-dest_files=["res://.godot/imported/Uv2_jupiter1_bump.png-0b146f1a8bf298a25b3fa54d0f5d9edf.s3tc.ctex"]
+dest_files=["res://.godot/imported/Uv2_jupiter1_bump.png-0b146f1a8bf298a25b3fa54d0f5d9edf.s3tc.ctex", "res://.godot/imported/Uv2_jupiter1_bump.png-0b146f1a8bf298a25b3fa54d0f5d9edf.etc2.ctex"]
 
 [params]
 

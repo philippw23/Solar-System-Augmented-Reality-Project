@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg7pjocv8db1f"
 path.s3tc="res://.godot/imported/Atmosphere_2K.png-0228a6b1bbb9013dd44b8dbe9cb68db9.s3tc.ctex"
+path.etc2="res://.godot/imported/Atmosphere_2K.png-0228a6b1bbb9013dd44b8dbe9cb68db9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Venus/texture/Atmosphere_2K.png"
-dest_files=["res://.godot/imported/Atmosphere_2K.png-0228a6b1bbb9013dd44b8dbe9cb68db9.s3tc.ctex"]
+dest_files=["res://.godot/imported/Atmosphere_2K.png-0228a6b1bbb9013dd44b8dbe9cb68db9.s3tc.ctex", "res://.godot/imported/Atmosphere_2K.png-0228a6b1bbb9013dd44b8dbe9cb68db9.etc2.ctex"]
 
 [params]
 

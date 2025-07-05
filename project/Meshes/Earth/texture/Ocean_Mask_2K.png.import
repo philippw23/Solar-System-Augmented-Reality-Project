@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://doxhlokmxxl4e"
 path.s3tc="res://.godot/imported/Ocean_Mask_2K.png-7b3ceec4eeaa80962605abf862d7e7ca.s3tc.ctex"
+path.etc2="res://.godot/imported/Ocean_Mask_2K.png-7b3ceec4eeaa80962605abf862d7e7ca.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Earth/texture/Ocean_Mask_2K.png"
-dest_files=["res://.godot/imported/Ocean_Mask_2K.png-7b3ceec4eeaa80962605abf862d7e7ca.s3tc.ctex"]
+dest_files=["res://.godot/imported/Ocean_Mask_2K.png-7b3ceec4eeaa80962605abf862d7e7ca.s3tc.ctex", "res://.godot/imported/Ocean_Mask_2K.png-7b3ceec4eeaa80962605abf862d7e7ca.etc2.ctex"]
 
 [params]
 

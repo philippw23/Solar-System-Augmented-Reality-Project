@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://jnx71v8x52q7"
 path.s3tc="res://.godot/imported/Uv1_uranus1_diff.png-3523b0a67bd000076d773f8ee0fb92b9.s3tc.ctex"
+path.etc2="res://.godot/imported/Uv1_uranus1_diff.png-3523b0a67bd000076d773f8ee0fb92b9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Uranus/textures/Uv1_uranus1_diff.png"
-dest_files=["res://.godot/imported/Uv1_uranus1_diff.png-3523b0a67bd000076d773f8ee0fb92b9.s3tc.ctex"]
+dest_files=["res://.godot/imported/Uv1_uranus1_diff.png-3523b0a67bd000076d773f8ee0fb92b9.s3tc.ctex", "res://.godot/imported/Uv1_uranus1_diff.png-3523b0a67bd000076d773f8ee0fb92b9.etc2.ctex"]
 
 [params]
 

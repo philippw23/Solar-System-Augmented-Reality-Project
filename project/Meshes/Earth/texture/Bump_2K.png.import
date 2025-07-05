@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bk0k7jytujfvw"
 path.s3tc="res://.godot/imported/Bump_2K.png-6e609664c4bb4aeb5f27baf5d42cacb1.s3tc.ctex"
+path.etc2="res://.godot/imported/Bump_2K.png-6e609664c4bb4aeb5f27baf5d42cacb1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Earth/texture/Bump_2K.png"
-dest_files=["res://.godot/imported/Bump_2K.png-6e609664c4bb4aeb5f27baf5d42cacb1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bump_2K.png-6e609664c4bb4aeb5f27baf5d42cacb1.s3tc.ctex", "res://.godot/imported/Bump_2K.png-6e609664c4bb4aeb5f27baf5d42cacb1.etc2.ctex"]
 
 [params]
 

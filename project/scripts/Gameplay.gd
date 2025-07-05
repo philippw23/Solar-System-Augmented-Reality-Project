@@ -158,7 +158,7 @@ var camera : CVCamera = CVCamera.new();
 var texture : ImageTexture;
 var overlay_texture : ImageTexture;
 var timer_framerate: Timer;
-var well_done_shown = false;
+var well_done_shown = true;
 var show_info := true;
 
 # Pose socket 通信
@@ -281,7 +281,7 @@ func _ready():
 	toggle_info_button.text = "Hide Info" if show_info else "Show Info";
 	
 	play_again_button.pressed.connect(_on_PlayAgainButton_pressed);
-	play_again_button.text = "Play Again"; 
+	play_again_button.text = "Play The Game"; 
 	
 	tutorial_button.pressed.connect(_on_Tutorial_pressed);
 	tutorial_button.text = "Show Tutorial";
@@ -353,6 +353,7 @@ func _on_timer_framerate():
 		if is_correct and not well_done_shown:
 			show_well_done()
 			well_done_shown = true
+			play_again_button.text = "Play The Game Again"
 	
 		
 	##
@@ -832,13 +833,19 @@ func show_well_done():
 	sprite.visible = false
 
 func _on_PlayAgainButton_pressed():
-	well_done_shown = false
-	for i in range(planet_models.size()):
-		var planet = planet_models[i]
-		if planet.has("last_world_transform"):
-			planet.erase("last_world_transform")
-			planet_models[i] = planet
-	print("Let‘s Play Again!")
+	
+	if play_again_button.text == "Play The Game" or play_again_button.text == "Play The Game Again" :
+		well_done_shown = false
+		play_again_button.text = "Exit The Game"
+		for i in range(planet_models.size()):
+			var planet = planet_models[i]
+			if planet.has("last_world_transform"):
+				planet.erase("last_world_transform")
+				planet_models[i] = planet
+		print("Let‘s Play Again!")
+	elif play_again_button.text == "Exit The Game":
+		well_done_shown = true
+		play_again_button.text = "Play The Game Again"
 	
 func _on_Tutorial_pressed():
 	if tutorial_popup and tutorial_text:

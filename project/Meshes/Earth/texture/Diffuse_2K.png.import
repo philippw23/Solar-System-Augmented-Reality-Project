@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpr6hvsrmpthe"
 path.s3tc="res://.godot/imported/Diffuse_2K.png-60e4ad25de6e07e2267d5e6fb7798914.s3tc.ctex"
+path.etc2="res://.godot/imported/Diffuse_2K.png-60e4ad25de6e07e2267d5e6fb7798914.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Meshes/Earth/texture/Diffuse_2K.png"
-dest_files=["res://.godot/imported/Diffuse_2K.png-60e4ad25de6e07e2267d5e6fb7798914.s3tc.ctex"]
+dest_files=["res://.godot/imported/Diffuse_2K.png-60e4ad25de6e07e2267d5e6fb7798914.s3tc.ctex", "res://.godot/imported/Diffuse_2K.png-60e4ad25de6e07e2267d5e6fb7798914.etc2.ctex"]
 
 [params]
 
