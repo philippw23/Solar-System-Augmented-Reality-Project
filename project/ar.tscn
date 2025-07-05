@@ -73,15 +73,15 @@ animations = [{
 script = ExtResource("1_2ycnw")
 camera_canvas = NodePath("UIRoot/CameraCanvas")
 overlay_canvas = NodePath("UIRoot/OverlayCanvas")
-threshold_slider = NodePath("UIRoot/VBoxContainer-MenuBottom/PanelContainer/HBoxContainer/HSlider-Threshold")
-mode_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/OptionButton-ImageMode")
-overlay_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/CheckButton-Overlay")
-toggle_info_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/ToggleInfoButton")
-play_again_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/PlayAgainButton")
-tutorial_popup = NodePath("UIRoot/VBoxContainer-MenuTop/TutorialPopup")
-tutorial_text = NodePath("UIRoot/VBoxContainer-MenuTop/TutorialPopup/VBoxContainer/RichTextLabel")
-tutorial_button = NodePath("UIRoot/VBoxContainer-MenuTop/HBoxContainer/TutorialButton")
-tutorial_vbox_container = NodePath("UIRoot/VBoxContainer-MenuTop/TutorialPopup/VBoxContainer")
+threshold_slider = NodePath("UIRoot/VBoxContainer_MenuBottom/PanelContainer/HBoxContainer/HSlider-Threshold")
+mode_button = NodePath("UIRoot/VBoxContainer_MenuTop/HBoxContainer/OptionButton-ImageMode")
+overlay_button = NodePath("UIRoot/VBoxContainer_MenuTop/HBoxContainer/CheckButton-Overlay")
+toggle_info_button = NodePath("UIRoot/VBoxContainer_MenuTop/HBoxContainer/ToggleInfoButton")
+play_again_button = NodePath("UIRoot/VBoxContainer_MenuTop/HBoxContainer/PlayAgainButton")
+tutorial_popup = NodePath("UIRoot/VBoxContainer_MenuTop/TutorialPopup")
+tutorial_text = NodePath("UIRoot/VBoxContainer_MenuTop/TutorialPopup/VBoxContainer/RichTextLabel")
+tutorial_button = NodePath("UIRoot/VBoxContainer_MenuTop/HBoxContainer/TutorialButton")
+tutorial_vbox_container = NodePath("UIRoot/VBoxContainer_MenuTop/TutorialPopup/VBoxContainer")
 sun_target = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Marker3D")
 sun_label3d = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Label3D")
 sun_info_label = NodePath("UIRoot/SubViewportContainer/SubViewport/Sun_Info_Label3D")
@@ -131,8 +131,6 @@ position = Vector2(640, 360)
 sprite_frames = SubResource("SpriteFrames_gitnh")
 animation = &"welldone"
 autoplay = "welldone"
-frame = 11
-frame_progress = 1.0
 
 [node name="OverlayCanvas" type="TextureRect" parent="UIRoot"]
 layout_mode = 1
@@ -270,15 +268,15 @@ visible = false
 
 [node name="neptune_model" parent="UIRoot/SubViewportContainer/SubViewport/Neptune_Marker3D" instance=ExtResource("10_kxbe2")]
 
-[node name="VBoxContainer-MenuTop" type="VBoxContainer" parent="UIRoot"]
+[node name="VBoxContainer_MenuTop" type="VBoxContainer" parent="UIRoot"]
 layout_mode = 0
 offset_right = 158.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/VBoxContainer-MenuTop"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/VBoxContainer_MenuTop"]
 layout_mode = 2
 
-[node name="OptionButton-ImageMode" type="OptionButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+[node name="OptionButton-ImageMode" type="OptionButton" parent="UIRoot/VBoxContainer_MenuTop/HBoxContainer"]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -289,51 +287,51 @@ popup/item_1/id = 1
 popup/item_2/text = "Threshold"
 popup/item_2/id = 2
 
-[node name="CheckButton-Overlay" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+[node name="CheckButton-Overlay" type="CheckButton" parent="UIRoot/VBoxContainer_MenuTop/HBoxContainer"]
 layout_mode = 2
 
-[node name="ToggleInfoButton" type="CheckButton" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+[node name="ToggleInfoButton" type="CheckButton" parent="UIRoot/VBoxContainer_MenuTop/HBoxContainer"]
 layout_mode = 2
 
-[node name="PlayAgainButton" type="Button" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+[node name="PlayAgainButton" type="Button" parent="UIRoot/VBoxContainer_MenuTop/HBoxContainer"]
 layout_mode = 2
 
-[node name="TutorialButton" type="Button" parent="UIRoot/VBoxContainer-MenuTop/HBoxContainer"]
+[node name="TutorialButton" type="Button" parent="UIRoot/VBoxContainer_MenuTop/HBoxContainer"]
 layout_mode = 2
 
-[node name="TutorialPopup" type="Window" parent="UIRoot/VBoxContainer-MenuTop"]
+[node name="TutorialPopup" type="Window" parent="UIRoot/VBoxContainer_MenuTop"]
 position = Vector2i(50, 50)
 size = Vector2i(700, 500)
 script = ExtResource("24_mfj8g")
 
-[node name="VBoxContainer" type="MarginContainer" parent="UIRoot/VBoxContainer-MenuTop/TutorialPopup"]
+[node name="VBoxContainer" type="MarginContainer" parent="UIRoot/VBoxContainer_MenuTop/TutorialPopup"]
 custom_minimum_size = Vector2(200, 200)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UIRoot/VBoxContainer-MenuTop/TutorialPopup/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="UIRoot/VBoxContainer_MenuTop/TutorialPopup/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
 
-[node name="VBoxContainer-MenuBottom" type="VBoxContainer" parent="UIRoot"]
+[node name="VBoxContainer_MenuBottom" type="VBoxContainer" parent="UIRoot"]
 layout_mode = 0
 offset_top = 625.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="PanelContainer" type="PanelContainer" parent="UIRoot/VBoxContainer-MenuBottom"]
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/VBoxContainer_MenuBottom"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/VBoxContainer-MenuBottom/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/VBoxContainer_MenuBottom/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UIRoot/VBoxContainer-MenuBottom/PanelContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UIRoot/VBoxContainer_MenuBottom/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Threshold"
 
-[node name="HSlider-Threshold" type="HSlider" parent="UIRoot/VBoxContainer-MenuBottom/PanelContainer/HBoxContainer"]
+[node name="HSlider-Threshold" type="HSlider" parent="UIRoot/VBoxContainer_MenuBottom/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
 
-[connection signal="close_requested" from="UIRoot/VBoxContainer-MenuTop/TutorialPopup" to="UIRoot/VBoxContainer-MenuTop/TutorialPopup" method="_on_TutorialPopup_close_requested"]
+[connection signal="close_requested" from="UIRoot/VBoxContainer_MenuTop/TutorialPopup" to="UIRoot/VBoxContainer_MenuTop/TutorialPopup" method="_on_TutorialPopup_close_requested"]
