@@ -166,6 +166,7 @@ var pose_server := TCPServer.new()
 var pose_stream : StreamPeerTCP = null
 
 var planet_labels = {}
+var game_started := false;
 
 func _ready():
 	## 初始化与 SLAM 通信的 socket
@@ -356,7 +357,11 @@ func _on_timer_framerate():
 	var current_order = sort_planets_by_distance_to_sun()
 	if current_order != null:
 		var expected_order = ["Sun","Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
-		color_planet_labels(current_order, expected_order)
+		if game_started:
+			color_planet_labels(current_order, expected_order)
+		if !game_started:
+			for label in planet_labels.values():
+				label.modulate = Color(1, 1, 1)  # Weiß
 		var is_correct: bool = current_order == expected_order
 		if is_correct and not well_done_shown:
 			show_well_done()
@@ -448,9 +453,9 @@ func show_well_done():
 	sprite.visible = false
 
 func _on_PlayAgainButton_pressed():
-	
 	if play_again_button.text == "Play The Game" or play_again_button.text == "Play The Game Again" :
 		well_done_shown = false
+		game_started = true  # ✅ Spiel beginnt hier
 		play_again_button.text = "Exit The Game"
 		for i in range(planet_models.size()):
 			var planet = planet_models[i]
@@ -460,7 +465,13 @@ func _on_PlayAgainButton_pressed():
 		print("Let‘s Play Again!")
 	elif play_again_button.text == "Exit The Game":
 		well_done_shown = true
+		game_started = false  # ❌ Spiel endet hier
 		play_again_button.text = "Play The Game Again"
+	## Sofort nach dem Start Farben setzen
+	#var current_order = sort_planets_by_distance_to_sun()
+	#if current_order != null:
+		#var expected_order = ["Sun","Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+		#color_planet_labels(current_order, expected_order)
 	
 func _on_Tutorial_pressed():
 	if tutorial_popup and tutorial_text:
@@ -557,7 +568,7 @@ func update_planet_marker(planet: Dictionary, target: Marker3D, label3d: Label3D
 	label3d.transform = label_transform
 	label3d.text = planet["name"]
 	label3d.visible = true
-	label3d.modulate = Color(0,1,1)   # Cyan
+	#label3d.modulate = Color(0,1,1)   # Cyan
 
 	# ===== Info Label =====
 	#var info_transform = label_transform.translated(Vector3(-0.04, -0.1, 0))
@@ -692,7 +703,9 @@ func color_planet_labels(current_order: Array, expected_order: Array):
 		var expected_index = expected_order.find(planet_name)
 		var current_index = current_order.find(planet_name)
 		#print("index compare: expected: ", expected_index, ", current: ", current_index)
-		
+		if current_index == -1:
+			# Nicht erkannt → bleib weiß oder blass
+			label3d.modulate = Color(1, 1, 1, 0.3)  # halbtransparent weiß
 		if expected_index == current_index:
 			label3d.modulate = Color(0, 1, 1)  # 蓝色: 正确
 		else:
