@@ -249,16 +249,26 @@ func _ready():
 	tutorial_text.bbcode_enabled = true
 	tutorial_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tutorial_text.add_theme_color_override("default_color", Color(1, 1, 1)) # weiß
-	tutorial_text.text = "[center][b]Welcome to the Solar System AR Experience![/b][/center]\n\n"\
-		+ "In this interactive project, you'll get to explore our solar system in a fun and immersive way.\n\n"\
-		+ "Simply point your camera at the different markers to bring each planet to life. As each marker is recognized, "\
-		+ "a detailed 3D model of the planet will appear on screen — along with fun and fascinating facts that help you learn more about our cosmic neighbours.\n\n"\
-		+ "Once you've explored them all, it's time for a challenge:\n"\
-		+ "Can you arrange the planets in the correct order from the Sun?\n\n"\
-		+ "Fix your camera in place, then try placing all nine markers (including the Sun) on a flat surface in the correct sequence — from Mercury all the way to Neptune.\n\n"\
-		+ "Use what you’ve learned and test your knowledge!\n\n"\
-		+ "[i]Get ready for an exciting journey through space — and have fun exploring![/i]"
-	
+	tutorial_text.text = "[center][b][font_size=28]Welcome to the Solar System AR Experience![/font_size][/b][/center]\n\n"\
+	+ "[font_size=18]In this interactive project, you'll get to explore our solar system in a fun and immersive way.\n\n"\
+	+ "Simply point your camera at the different markers to bring each planet to life. As each marker is recognized, "\
+	+ "a detailed 3D model of the planet will appear on screen — along with fun and fascinating facts that help you learn more about our cosmic neighbours.\n\n"\
+	+ "Once you've explored them all, it's time for a challenge:\n"\
+	+ "Can you arrange the planets in the correct order from the Sun?\n\n"\
+	+ "Fix your camera in place, then try placing all nine markers (including the Sun) on a flat surface in the correct sequence — from Mercury all the way to Neptune.\n\n"\
+	+ "Use what you’ve learned and test your knowledge!\n\n"\
+	+ "[b][font_size=20]Game Mode Controls:[/font_size][/b]\n"\
+	+ "• [b]Play The Game[/b]: Starts the ordering challenge. Planet names will be colored:\n"\
+	+ "   - [color=cyan]Blue[/color] = correct position\n"\
+	+ "   - [color=red]Red[/color] = incorrect position\n"\
+	+ "   - [color=gray]Gray[/color] = planet not visible yet\n"\
+	+ "• [b]Exit The Game[/b]: Ends the challenge and resets label colors.\n\n"\
+	+ "[b][font_size=20]Other Options:[/font_size][/b]\n"\
+	+ "• [b]Hide Info / Show Info[/b]: Toggles the visibility of fun planet facts.\n"\
+	+ "• [b]Show Tutorial[/b]: Displays this help window again.\n"\
+	+ "• [b]Threshold Slider[/b]: Adjusts the sensitivity of the marker detection (at the bottom left of the screen).\n\n"\
+	+ "[i]Tip: Higher threshold = fewer false detections, but may miss fainter markers. Lower threshold = more sensitive, but risk of noise.[/i]\n\n"\
+	+ "[i]Get ready for an exciting journey through space — and have fun exploring![/i][/font_size]"
 	## Position innerhalb des CameraCanvas mittig setzen
 	tutorial_popup.position = camera_canvas.global_position + (camera_canvas.size - popup_size) / 2
 	
